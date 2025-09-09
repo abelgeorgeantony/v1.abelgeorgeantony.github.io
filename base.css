@@ -1,56 +1,59 @@
+/* --- Import Google Fonts --- */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
+
+/* --- Light Theme (Default) --- */
 :root {
-    --background-color: #f8f9fa;
-    --text-color: #212529;
-    --header-bg: #007bff;
-    --header-text: #ffffff;
-    --main-bg: #ffffff;
-    --box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    --link-color: #007bff;
-    --button-border: #007bff;
-    --button-text: #007bff;
-    --button-bg: #ffffff;
-    --button-hover-bg: #007bff;
-    --button-hover-text: #ffffff;
+    --bg-color: #fcfcfc;
+    --text-color: #111827;
+    --primary-color: #0064ff; /* Teal */
+    --card-bg-color: #ffffff;
+    --header-bg-color: rgba(252, 252, 252, 0.8);
+    --border-color: #e5e7eb;
+    --shadow-color: rgba(0, 0, 0, 0.05);
+    --link-hover-color: #0064ff; /* Darker Teal */
 }
 
+/* --- Dark Theme --- */
 [data-theme="dark"] {
-    --background-color: #121a23;
-    --text-color: #ced4da;
-    --header-bg: #1a242f;
-    --header-text: #ced4da;
-    --main-bg: #1c2835;
-    --box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
-    --link-color: #3399ff;
-    --button-border: #3399ff;
-    --button-text: #3399ff;
-    --button-bg: #1c2835;
-    --button-hover-bg: #3399ff;
-    --button-hover-text: #121a23;
+    --bg-color: #0d1117; /* Dark Blue */
+    --text-color: #e5e7eb;
+    --primary-color: #0064ff; /* Bright Teal */
+    --card-bg-color: #161b22;
+    --header-bg-color: rgba(13, 17, 23, 0.8);
+    --border-color: #30363d;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --link-hover-color: #0064ff; /* Lighter Teal */
 }
 
+hidden {
+    display: none;
+}
+
+/* --- Base Styles --- */
 body {
-    font-family: sans-serif;
+    font-family: "Inter", sans-serif;
     margin: 0;
-    background-color: var(--background-color);
+    background-color: var(--bg-color);
     color: var(--text-color);
     transition:
-        background-color 0.3s,
-        color 0.3s;
+        background-color 0.3s ease,
+        color 0.3s ease;
 }
 
+/* --- Header & Navigation --- */
 header {
-    background-color: var(--header-bg);
-    color: var(--header-text);
-    padding: 1rem 0;
-    text-align: center;
+    background-color: var(--header-bg-color);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 1rem 2rem;
     position: fixed;
     top: 0;
-    width: 100%;
+    width: calc(100% - 4rem); /* Adjust for padding */
     z-index: 1000;
+    border-bottom: 1px solid var(--border-color);
     transition:
-        background-color 0.3s,
-        color 0.3s;
-    border-bottom: 1px solid var(--header-bg);
+        background-color 0.3s ease,
+        border-color 0.3s ease;
 }
 
 nav {
@@ -58,95 +61,266 @@ nav {
     justify-content: center;
     align-items: center;
     position: relative;
-    height: 30px;
     width: 100%;
+    height: 30px;
+    margin: 0 auto;
+}
+
+.nav-right-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: absolute;
+    right: 0;
 }
 
 nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
+    margin-right: 10px;
+    display: flex;
+    gap: 25px;
 }
-
-nav ul li {
-    display: inline;
-    margin: 0 15px;
+#hamburger-btn {
+    margin-right: 10px;
+    padding-top: 4px;
+    display: none;
 }
 
 nav ul li a {
-    color: var(--header-text);
+    color: var(--text-color);
     text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s;
+    font-weight: 500;
+    position: relative;
+    padding-bottom: 5px;
+    transition: color 0.3s ease;
+}
+
+nav ul li a::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
 }
 
 nav ul li a:hover {
-    color: var(--link-color);
+    color: var(--primary-color);
 }
 
-#theme-toggle {
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+/* The full-screen overlay menu */
+#mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-color);
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    /* Hide it by default */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-100%);
+    transition: all 0.4s ease-in-out;
+}
+#mobile-menu #close-btn {
+    padding-top: 5px;
     position: absolute;
+    top: 18px;
     right: 20px;
+}
+#mobile-menu ul {
+    list-style: none;
+    font-size: xxx-large;
+    height: 60vh;
+    width: 60vw;
+}
+#mobile-menu ul li a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+#mobile-menu ul li a:hover {
+    color: var(--primary-color);
+}
+/* The class that will be toggled with JavaScript to show the menu */
+#mobile-menu.is-active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+/* Prevent scrolling when the menu is open */
+body.menu-open {
+    overflow: hidden;
+}
+
+/* --- Theme Toggle Button --- */
+#theme-toggle {
+    right: 0;
     cursor: pointer;
     width: 40px;
     height: 40px;
-    background-color: var(--button-bg);
+    background-color: transparent;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     transition:
-        background-color 0.3s,
-        transform 0.3s;
-    border: 1px solid var(--button-border);
+        background-color 0.3s ease,
+        transform 0.3s ease;
 }
 
 #theme-toggle:hover {
-    transform: scale(1.1);
+    background-color: var(--card-bg-color);
 }
 
 #theme-toggle .material-icons {
-    color: var(--button-text);
+    color: var(--text-color);
     transition:
-        color 0.3s,
-        transform 0.3s;
+        color 0.3s ease,
+        transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 html[data-theme="dark"] #theme-toggle .material-icons {
     transform: rotate(180deg);
 }
 
+/* --- Main Content --- */
 main {
-    padding: 20px;
+    padding: 40px 20px;
     max-width: 800px;
-    margin: 80px auto 20px;
-    background-color: var(--main-bg);
-    border-radius: 8px;
-    box-shadow: var(--box-shadow);
-    transition: background-color 0.3s;
+    margin: 100px auto 40px; /* Increased top margin for fixed header */
+}
+
+section {
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+}
+
+h1,
+h2 {
+    color: var(--text-color);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 10px;
+    margin-top: 0;
+}
+
+p {
+    line-height: 1.7;
 }
 
 a {
-    color: var(--link-color);
+    color: var(--primary-color);
     text-decoration: none;
-    transition: color 0.3s;
+    font-weight: 500;
+    transition: color 0.3s ease;
 }
 
 a:hover {
+    color: var(--link-hover-color);
     text-decoration: underline;
 }
 
+hr {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 2rem 0;
+}
+
+/* --- Project & Blog Specific Styles --- */
+.project,
+.blog-article {
+    margin-bottom: 1.5rem;
+}
+
+/* --- Form Styles --- */
+form div {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition:
+        border-color 0.3s ease,
+        background-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px
+        color-mix(in srgb, var(--primary-color) 20%, transparent);
+}
+
+button[type="submit"] {
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    transition:
+        background-color 0.3s ease,
+        transform 0.2s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: var(--link-hover-color);
+    transform: translateY(-2px);
+}
+
+/* --- Footer --- */
 footer {
     text-align: center;
     padding: 20px;
-    margin-top: 20px;
-    background-color: var(--header-bg);
-    color: var(--header-text);
-    transition:
-        background-color 0.3s,
-        color 0.3s;
+    color: var(--text-color);
+    opacity: 0.7;
 }
 
-h1 {
-    color: var(--text-color);
+/* --- Media Queries for Responsiveness --- */
+@media (max-width: 768px) {
+    /* Hide the desktop navigation on mobile */
+    #desktop-nav {
+        display: none;
+    }
+
+    /* Show the hamburger button on mobile */
+    #hamburger-btn {
+        display: block;
+    }
+
+    /* Adjust nav to push hamburger to the right */
+    nav {
+        justify-content: flex-end;
+    }
 }
