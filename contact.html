@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Contact - Abel George Antony</title>
+        <link rel="stylesheet" href="base.css" />
+        <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="index.html">About</a></li>
+                    <li><a href="blog.html">Blogging</a></li>
+                    <li><a href="projects.html">Projects/Experiences</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div id="theme-toggle">
+                    <span class="material-icons">light_mode</span>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <section id="contact">
+                <h1>Contact Me</h1>
+                <p>
+                    You can reach me at
+                    <a href="mailto:email@example.com">email@example.com</a>, or
+                    use the form below.
+                </p>
+                <form action="#" method="post">
+                    <div>
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required />
+                    </div>
+                    <div>
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required />
+                    </div>
+                    <div>
+                        <label for="message">Message:</label>
+                        <textarea
+                            id="message"
+                            name="message"
+                            required
+                        ></textarea>
+                    </div>
+                    <div>
+                        <button type="submit">Send Message</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2025 Abel George Antony</p>
+        </footer>
+        <script src="theme.js"></script>
+    </body>
+</html>
