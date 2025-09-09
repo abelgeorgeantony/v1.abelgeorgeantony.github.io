@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", async function () {
-  await loadAndReplaceHTML("_header.html", "header-placeholder");
+  await loadAndReplaceHTML("header.html", "header-placeholder");
   await loadAndReplaceHTML("_footer.html", "footer-placeholder");
   console.log("DOMContentLoaded event fired");
 
