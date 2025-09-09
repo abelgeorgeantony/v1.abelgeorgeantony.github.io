@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", async function () {
   await loadAndReplaceHTML("header.html", "header-placeholder");
-  await loadAndReplaceHTML("_footer.html", "footer-placeholder");
+  await loadAndReplaceHTML("footer.html", "footer-placeholder");
   console.log("DOMContentLoaded event fired");
 
   // Get the filename of the current page (e.g., "index.html" or "blog.html")
