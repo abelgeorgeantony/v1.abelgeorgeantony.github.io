@@ -144,9 +144,10 @@ nav ul li a:hover::after {
 }
 #mobile-menu ul {
     list-style: none;
-    font-size: xxx-large;
+    font-size: 1.5em;
     height: 60vh;
     width: 60vw;
+    align-content: center;
 }
 #mobile-menu ul li a {
     color: var(--text-color);
