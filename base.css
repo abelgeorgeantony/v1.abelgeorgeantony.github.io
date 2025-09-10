@@ -6,7 +6,7 @@
     --bg-color: #fcfcfc;
     --text-color: #111827;
     --primary-color: #0064ff; /* Teal */
-    --card-bg-color: #ffffff;
+    --alt-bg-color: #ddd;
     --header-bg-color: rgba(252, 252, 252, 0.8);
     --border-color: #e5e7eb;
     --shadow-color: rgba(0, 0, 0, 0.05);
@@ -18,11 +18,15 @@
     --bg-color: #0d1117; /* Dark Blue */
     --text-color: #e5e7eb;
     --primary-color: #0064ff; /* Bright Teal */
-    --card-bg-color: #161b22;
+    --alt-bg-color: #161b22;
     --header-bg-color: rgba(13, 17, 23, 0.8);
     --border-color: #30363d;
     --shadow-color: rgba(0, 0, 0, 0.1);
     --link-hover-color: #0064ff; /* Lighter Teal */
+}
+
+.material-icons {
+    line-height: unset !important;
 }
 
 hidden {
@@ -144,7 +148,7 @@ nav ul li a:hover::after {
 }
 #mobile-menu ul {
     list-style: none;
-    font-size: 1.5em;
+    font-size: 1.8em;
     height: 60vh;
     width: 60vw;
     align-content: center;
@@ -185,7 +189,7 @@ body.menu-open {
 }
 
 #theme-toggle:hover {
-    background-color: var(--card-bg-color);
+    background-color: var(--alt-bg-color);
 }
 
 #theme-toggle .material-icons {
@@ -281,6 +285,24 @@ textarea:focus {
         color-mix(in srgb, var(--primary-color) 20%, transparent);
 }
 
+button {
+    background-color: var(--alt-bg-color);
+    color: var(--text-color);
+    border: none;
+    padding: 5px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    transition:
+        background-color 0.3s ease,
+        transform 0.2s ease;
+}
+button:hover {
+    background-color: var(--link-hover-color);
+    transform: translateY(-2px);
+}
+
 button[type="submit"] {
     background-color: var(--primary-color);
     color: var(--bg-color);
@@ -294,7 +316,6 @@ button[type="submit"] {
         background-color 0.3s ease,
         transform 0.2s ease;
 }
-
 button[type="submit"]:hover {
     background-color: var(--link-hover-color);
     transform: translateY(-2px);
