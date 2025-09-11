@@ -349,3 +349,53 @@ footer {
         display: block;
     }
 }
+
+/* --- Social Links --- */
+.social-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.social-link {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 1rem;
+    background-color: var(--alt-bg-color);
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--text-color);
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+    border: 1px solid var(--border-color);
+    aspect-ratio: 1 / 1;
+}
+
+.social-link:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px var(--shadow-color);
+    color: var(--primary-color);
+}
+
+.social-link:hover .social-svg {
+    stroke: var(--link-hover-color);
+}
+
+.social-svg {
+    width: 48px;
+    height: 48px;
+    stroke: var(--primary-color);
+    fill: none;
+    stroke-width: 1.5;
+    transition: stroke 0.2s ease;
+}
+
+.social-text {
+    font-weight: 500;
+    font-size: 1rem;
+}
