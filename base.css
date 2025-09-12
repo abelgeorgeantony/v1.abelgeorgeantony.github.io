@@ -382,13 +382,18 @@ footer {
     color: var(--primary-color);
 }
 
-.social-link:hover .social-svg {
+.social-link:hover .social-svg-stroked {
     stroke: var(--link-hover-color);
 }
 
+/* Base style for all social SVGs */
 .social-svg {
     width: 48px;
     height: 48px;
+}
+
+/* Style for line-art icons */
+.social-svg-stroked {
     stroke: var(--primary-color);
     fill: none;
     stroke-width: 1.5;
@@ -398,4 +403,30 @@ footer {
 .social-text {
     font-weight: 500;
     font-size: 1rem;
+}
+
+/* --- 404 Page --- */
+.text-center {
+    text-align: center;
+}
+
+.button-primary {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    text-decoration: none;
+    transition:
+        background-color 0.3s ease,
+        transform 0.2s ease;
+}
+
+.button-primary:hover {
+    background-color: var(--link-hover-color);
+    transform: translateY(-2px);
 }
