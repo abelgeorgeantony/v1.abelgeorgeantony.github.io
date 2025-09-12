@@ -6,7 +6,8 @@
     --bg-color: #fcfcfc;
     --text-color: #111827;
     --primary-color: #0064ff; /* Teal */
-    --alt-bg-color: #ddd;
+    --primary-rgb: 0, 100, 255;
+    --alt-bg-color: #d1d1d1;
     --header-bg-color: rgba(252, 252, 252, 0.8);
     --border-color: #e5e7eb;
     --shadow-color: rgba(0, 0, 0, 0.05);
@@ -18,7 +19,8 @@
     --bg-color: #0d1117; /* Dark Blue */
     --text-color: #e5e7eb;
     --primary-color: #0064ff; /* Bright Teal */
-    --alt-bg-color: #161b22;
+    --primary-rgb: 0, 100, 255;
+    --alt-bg-color: #11151c;
     --header-bg-color: rgba(13, 17, 23, 0.8);
     --border-color: #30363d;
     --shadow-color: rgba(0, 0, 0, 0.1);
@@ -83,7 +85,6 @@ nav {
 .nav-left-container h1 {
     margin: 0; /* Remove default h1 margin */
     font-size: 1.1rem;
-    border: none; /* Override default h1 border */
     padding: 0;
 }
 
@@ -223,11 +224,63 @@ section {
     margin-bottom: 2rem;
 }
 
+.page-header {
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 20px;
+    margin-bottom: 2rem;
+}
+
+.page-header h1 {
+    margin: 0;
+}
+
+.page-header p {
+    margin: 0.5rem 0 0 0;
+    font-size: 1.1rem;
+    opacity: 0.8;
+}
+
+.hashtag-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 0.5rem;
+}
+
+.hashtag {
+    display: flex;
+    align-items: center;
+    background-color: var(--alt-bg-color);
+    border-radius: 16px;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.hashtag:hover {
+    background-color: color-mix(
+        in srgb,
+        var(--primary-color) 20%,
+        var(--alt-bg-color)
+    );
+}
+
+.hashtag .close-icon {
+    font-size: 1rem;
+    margin-left: 8px;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+}
+
+.hashtag:hover .close-icon {
+    opacity: 1;
+}
+
 h1,
 h2 {
     color: var(--text-color);
-    border-bottom: 2px solid var(--border-color);
-    padding-bottom: 10px;
     margin-top: 0;
 }
 
@@ -332,9 +385,15 @@ button[type="submit"]:hover {
 /* --- Footer --- */
 footer {
     text-align: center;
-    padding: 20px;
+    padding: 4rem 2rem 2rem;
+    margin-top: 2rem;
+    background: linear-gradient(
+        to bottom,
+        var(--bg-color),
+        var(--alt-bg-color)
+    );
     color: var(--text-color);
-    opacity: 0.7;
+    transition: background 0.3s ease;
 }
 
 /* --- Media Queries for Responsiveness --- */
@@ -429,4 +488,101 @@ footer {
 .button-primary:hover {
     background-color: var(--link-hover-color);
     transform: translateY(-2px);
+}
+
+/* --- Quotes Page --- */
+#quotes-grid {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.quote-card {
+    background-color: var(--alt-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 4px 6px -1px var(--shadow-color);
+    transition: box-shadow 0.3s ease;
+}
+
+.quote-card:hover {
+    box-shadow: 0 8px 15px var(--shadow-color);
+}
+
+.quote-preview {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    cursor: pointer;
+}
+
+.quote-text {
+    font-size: 1.2rem;
+    font-style: italic;
+    font-weight: 500;
+    margin: 0;
+    grid-column: 1 / -1;
+}
+
+.quote-author {
+    display: block;
+    text-align: left;
+    font-weight: 500;
+    color: var(--primary-color);
+    margin-top: 1rem;
+    grid-column: 1 / 2;
+}
+
+.quote-expand-icon {
+    font-size: 2rem;
+    color: var(--text-color);
+    opacity: 0.7;
+    transition:
+        transform 0.3s ease,
+        opacity 0.3s ease;
+    grid-column: 2 / 3;
+    justify-self: end;
+}
+
+.quote-preview:hover .quote-expand-icon {
+    opacity: 1;
+}
+
+.quote-card.expanded .quote-expand-icon {
+    transform: rotate(360deg);
+}
+
+.quote-details {
+    max-height: 0;
+    overflow: hidden;
+    transition:
+        max-height 0.5s ease-in-out,
+        padding-top 0.5s ease-in-out;
+}
+
+.quote-card.expanded .quote-details {
+    max-height: 1000px;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    margin-top: 1.5rem;
+}
+
+.quote-details h3 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-color);
+    opacity: 0.7;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    border: none;
+    padding: 0;
+}
+
+.quote-details p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
 }
