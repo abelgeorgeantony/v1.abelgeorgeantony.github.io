@@ -50,6 +50,8 @@ document.addEventListener("DOMContentLoaded", async function () {
       setTheme("dark");
     }
   });
+
+  initHashtagDragAndDrop();
 });
 
 /*// Function to load and REPLACE HTML partials
@@ -128,5 +130,54 @@ function setTheme(theme) {
     document.getElementById("theme-toggle").querySelector("span").textContent =
       "light_mode";
     document.cookie = "theme=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+  }
+}
+
+// --- NEW: Hashtag Drag and Drop Logic ---
+function initHashtagDragAndDrop() {
+  const containers = document.querySelectorAll(".hashtag-container");
+
+  containers.forEach((container) => {
+    const draggables = container.querySelectorAll(".hashtag");
+
+    draggables.forEach((draggable) => {
+      draggable.addEventListener("dragstart", () => {
+        draggable.classList.add("dragging");
+      });
+
+      draggable.addEventListener("dragend", () => {
+        draggable.classList.remove("dragging");
+      });
+    });
+
+    container.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      const afterElement = getDragAfterElement(container, e.clientX);
+      const draggable = document.querySelector(".dragging");
+      if (afterElement == null) {
+        container.appendChild(draggable);
+      } else {
+        container.insertBefore(draggable, afterElement);
+      }
+    });
+  });
+
+  function getDragAfterElement(container, x) {
+    const draggableElements = [
+      ...container.querySelectorAll(".hashtag:not(.dragging)"),
+    ];
+
+    return draggableElements.reduce(
+      (closest, child) => {
+        const box = child.getBoundingClientRect();
+        const offset = x - box.left - box.width / 2;
+        if (offset < 0 && offset > closest.offset) {
+          return { offset: offset, element: child };
+        } else {
+          return closest;
+        }
+      },
+      { offset: Number.NEGATIVE_INFINITY },
+    ).element;
   }
 }

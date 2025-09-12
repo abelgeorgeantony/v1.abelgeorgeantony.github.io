@@ -258,6 +258,9 @@ section {
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
+.hashtag.dragging {
+    opacity: 0.5;
+}
 
 .hashtag:hover {
     background-color: color-mix(
