@@ -12,6 +12,18 @@
         <script src="base.js" defer></script>
         <script src="nav.js" defer></script>
         <script src="quotes.js" defer></script>
+        <script src="quotes/fortunes/cowsay.js" async></script>
+        <script>
+            var Module = {
+                locateFile: function (path) {
+                    return "quotes/fortunes/" + path;
+                },
+                onRuntimeInitialized: function () {
+                    onFortuneModuleReady();
+                },
+            };
+        </script>
+        <script src="quotes/fortunes/libminifortune.js" async></script>
     </head>
     <body>
         <div id="header-placeholder"></div>
