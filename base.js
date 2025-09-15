@@ -112,6 +112,11 @@ async function loadAndReplaceHTML(url, elementId) {
   });
 }
 
+function isSmallScreen() {
+  // You can adjust the 768px breakpoint as needed
+  return window.matchMedia("(max-width: 768px)").matches;
+}
+
 // Function to get a cookie
 function getCookie(name) {
   const value = `; ${document.cookie}`;

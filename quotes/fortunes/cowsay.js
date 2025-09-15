@@ -10,7 +10,7 @@ function cowsay(text) {
   };
 
   const bottom = (length) => {
-    return new Array(length + 3).join("-");
+    return new Array(length + 3).join("‾");
   };
 
   const pad = (text, length) => {
@@ -22,6 +22,7 @@ function cowsay(text) {
       .replace(/\r\n?|[\n\u2028\u2029]/g, "\n")
       .replace(/^\uFEFF/, "")
       .replace(/\t/g, "        ");
+
     const lines = [];
     if (!wrap) {
       return text.split("\n");
@@ -116,15 +117,15 @@ function cowsay(text) {
       .replace(/\$\{tongue\}/g, tongue);
   };
 
-  // The default cow ASCII art. Spaces here are crucial for alignment and are not replaced yet.
+  // The default cow ASCII art.
   const defaultCow = `
         $thoughts   ^__^
          $thoughts  ($eyes)\\_______
-            (__)\\          )\\/\\
-             $tongue   ||----w |
-                  ||      ||`;
+            (__)\\       )\\/\\
+             $tongue ||----w |
+                ||     ||`;
 
-  // Default face options
+  // Default face options.
   const face = {
     eyes: "oo",
     tongue: "  ",
@@ -132,14 +133,17 @@ function cowsay(text) {
   };
 
   // Generate the balloon and the cow
-  const balloon = sayBalloon(text, 40);
-  const cow = replacer(defaultCow, face);
+  if (isSmallScreen()) {
+    const balloon = sayBalloon(text, 26);
+    const cow = replacer(defaultCow, face);
 
-  // Format for HTML. This is where the space and newline replacement happens.
-  let htmlOutput = (balloon + cow)
-    .replace(/ /g, "&nbsp;")
-    .replace(/\n/g, "<br>");
+    // Return the final raw string with standard spaces and newlines
+    return balloon + "\n" + cow;
+  } else {
+    const balloon = sayBalloon(text, 40);
+    const cow = replacer(defaultCow, face);
 
-  // Return the final string
-  return htmlOutput;
+    // Return the final raw string with standard spaces and newlines
+    return balloon + "\n" + cow;
+  }
 }

@@ -19,12 +19,12 @@ function cowsay(text) {
 
   const split = (text, wrap) => {
     text = text
-      .replace(/\r\n?|[\n\u2028\u2029]/g, "<br>")
+      .replace(/\r\n?|[\n\u2028\u2029]/g, "\n")
       .replace(/^\uFEFF/, "")
       .replace(/\t/g, "        ");
     const lines = [];
     if (!wrap) {
-      return text.split("<br>");
+      return text.split("\n");
     }
     let start = 0;
     while (start < text.length) {
@@ -116,13 +116,13 @@ function cowsay(text) {
       .replace(/\$\{tongue\}/g, tongue);
   };
 
-  // The default cow ASCII art
+  // The default cow ASCII art. Spaces here are crucial for alignment and are not replaced yet.
   const defaultCow = `
         $thoughts   ^__^
          $thoughts  ($eyes)\\_______
-            (__)\\       )\\/\\
-             $tongue ||----w |
-                ||     ||`;
+            (__)\\          )\\/\\
+             $tongue   ||----w |
+                  ||      ||`;
 
   // Default face options
   const face = {
@@ -135,9 +135,11 @@ function cowsay(text) {
   const balloon = sayBalloon(text, 40);
   const cow = replacer(defaultCow, face);
 
-  // Return the final string
-  return balloon + "<br>" + cow;
-}
+  // Format for HTML. This is where the space and newline replacement happens.
+  let htmlOutput = (balloon + cow)
+    .replace(/ /g, "&nbsp;")
+    .replace(/\n/g, "<br>");
 
-// Example usage:
-// console.log(cowsay("Hello, I'm a cow!"));
+  // Return the final string
+  return htmlOutput;
+}
