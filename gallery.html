@@ -11,49 +11,83 @@
         />
         <script src="base.js" defer></script>
         <script src="nav.js" defer></script>
+        <script>
+            var Module = {
+                locateFile: function (path) {
+                    return "quotes/fortunes/" + path;
+                },
+                onRuntimeInitialized: function () {
+                    onFortuneModuleReady();
+                },
+            };
+        </script>
+        <script src="quotes/fortunes/libminifortune.js" async></script>
     </head>
     <body>
         <div id="header-placeholder"></div>
 
         <main>
-            <section id="projects">
+            <section id="gallery-page">
                 <div class="page-header">
                     <h1>Gallery</h1>
                     <div class="hashtag-container">
                         <div class="hashtag" draggable="true">
-                            <span>#projects</span>
-                            <span class="material-icons close-icon">close</span>
+                            <span>#pictures</span
+                            ><span class="material-icons close-icon"
+                                >close</span
+                            >
                         </div>
                         <div class="hashtag" draggable="true">
-                            <span>#experience</span>
-                            <span class="material-icons close-icon">close</span>
+                            <span>#projects</span
+                            ><span class="material-icons close-icon"
+                                >close</span
+                            >
                         </div>
                         <div class="hashtag" draggable="true">
-                            <span>#showcase</span>
-                            <span class="material-icons close-icon">close</span>
+                            <span>#showcase</span
+                            ><span class="material-icons close-icon"
+                                >close</span
+                            >
                         </div>
                     </div>
                 </div>
-                <div class="project">
-                    <h2>Project One</h2>
-                    <p><strong>Role:</strong> Lead Developer</p>
-                    <p><strong>Duration:</strong> January 2024 - Present</p>
-                    <p>
-                        A description of the project, the technologies used, and
-                        your role in it. This is a placeholder, so you can
-                        replace it with your actual project details.
-                    </p>
+
+                <div class="instagram-section">
+                    <div class="instagram-header">
+                        <h2>From my Instagram Profile</h2>
+                        <a
+                            href="https://www.instagram.com/abelgeorgeantony"
+                            target="_blank"
+                            >@abelgeorgeantony</a
+                        >
+                    </div>
+                    <!-- LightWidget WIDGET -->
+                    <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
+                    <iframe
+                        src="//lightwidget.com/widgets/8baf0481dde5513f874fc965f7e8c76f.html"
+                        scrolling="no"
+                        allowtransparency="true"
+                        class="lightwidget-widget"
+                        style="width: 100%; border: 0; overflow: hidden"
+                    ></iframe>
                 </div>
+
                 <hr />
-                <div class="project">
-                    <h2>Experience at Company X</h2>
-                    <p><strong>Role:</strong> Software Engineer Intern</p>
-                    <p><strong>Duration:</strong> Summer 2023</p>
-                    <p>
-                        A summary of your responsibilities and achievements
-                        during your time at Company X. Like the project above,
-                        this is a placeholder for you to fill in.
-                    </p>
+
+                <div class="projects-section">
+                    <h2>My Projects</h2>
+                    <div class="project-card">
+                        <h3>Just A Calendar</h3>
+                        <p>
+                            Stores the events of users, shows special events,
+                            and partially implemented an AI assistant using
+                            Google APIs.
+                        </p>
+                        <p>
+                            <strong>Tech:</strong> Node JS, Express, Mongo DB,
+                            HTML, CSS, JS
+                        </p>
+                    </div>
                 </div>
             </section>
         </main>

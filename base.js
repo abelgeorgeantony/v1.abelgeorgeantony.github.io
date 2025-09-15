@@ -52,6 +52,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   });
 
   initHashtagDragAndDrop();
+  initHashtagToggle();
 });
 
 /*// Function to load and REPLACE HTML partials
@@ -179,5 +180,58 @@ function initHashtagDragAndDrop() {
       },
       { offset: Number.NEGATIVE_INFINITY },
     ).element;
+  }
+}
+
+// --- NEW: Hashtag Toggle Logic ---
+function initHashtagToggle() {
+  const hashtagIcons = document.querySelectorAll(".hashtag .close-icon");
+
+  hashtagIcons.forEach((icon) => {
+    icon.addEventListener("click", (e) => {
+      e.stopPropagation(); // Prevent drag and drop from firing
+      const hashtag = icon.parentElement;
+      hashtag.classList.toggle("inactive");
+
+      if (hashtag.classList.contains("inactive")) {
+        icon.textContent = "add";
+      } else {
+        icon.textContent = "close";
+      }
+    });
+  });
+}
+
+function getFortune() {
+  if (typeof Module === "undefined" || !Module._minifortune) {
+    console.error("Minifortune module not loaded or ready.");
+    return null;
+  }
+  try {
+    const fortunePtr = Module._minifortune();
+    const fortuneString = UTF8ToString(fortunePtr);
+    //const fortuneText = document.getElementById("fortune-text");
+    //if (fortuneText) {
+    //fortuneText.innerText = fortuneString;
+    //}
+    Module._free(fortunePtr);
+    return fortuneString;
+  } catch (e) {
+    console.error("Error getting fortune:", e);
+    return null;
+  }
+}
+
+function onFortuneModuleReady() {
+  const myFortune = getFortune();
+  if (myFortune) {
+    const fortuneText = document.getElementById("fortune-text");
+    if (fortuneText) {
+      fortuneText.innerHTML = cowsay(myFortune);
+    } else {
+      console.error("fortune-text element not found. Retrying...");
+      setTimeout(onFortuneModuleReady, 500); // Retry after a delay
+      return;
+    }
   }
 }
