@@ -27,19 +27,34 @@ function cowsay(text) {
     if (!wrap) {
       return text.split("\n");
     }
-    let start = 0;
-    while (start < text.length) {
-      const nextNewLine = text.indexOf("\n", start);
-      const wrapAt = Math.min(
-        start + wrap,
-        nextNewLine === -1 ? text.length : nextNewLine,
-      );
-      lines.push(text.substring(start, wrapAt));
-      start = wrapAt;
-      if (text.charAt(start) === "\n") {
-        start += 1;
+
+    const textLines = text.split("\n");
+
+    for (const textLine of textLines) {
+      let currentLine = "";
+      const words = textLine.split(" ");
+
+      for (const word of words) {
+        // If a single word is longer than the wrap limit, break it
+        if (word.length > wrap) {
+          if (currentLine) lines.push(currentLine);
+          lines.push(word);
+          currentLine = "";
+          continue;
+        }
+
+        if (currentLine.length + word.length + (currentLine ? 1 : 0) <= wrap) {
+          currentLine += (currentLine ? " " : "") + word;
+        } else {
+          lines.push(currentLine);
+          currentLine = word;
+        }
+      }
+      if (currentLine) {
+        lines.push(currentLine);
       }
     }
+
     return lines;
   };
 

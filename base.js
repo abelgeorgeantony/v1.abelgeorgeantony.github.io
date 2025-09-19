@@ -53,28 +53,8 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   initHashtagDragAndDrop();
   initHashtagToggle();
+  initTooltips();
 });
-
-/*// Function to load and REPLACE HTML partials
-const loadAndReplaceHTML = async (url, elementId) => {
-  const response = await fetch(url);
-  const text = await response.text();
-
-  // Create a temporary container to parse the fetched HTML string
-  const tempDiv = document.createElement("div");
-  tempDiv.innerHTML = text;
-
-  // Get the actual element from the parsed HTML (e.g., the <header> or <footer> tag)
-  const elementToInsert = tempDiv.firstElementChild;
-
-  // Find the placeholder on the page
-  const placeholder = document.getElementById(elementId);
-
-  // Replace the placeholder with the new element
-  if (placeholder && elementToInsert) {
-    placeholder.replaceWith(elementToInsert);
-  }
-};*/
 
 // Function to load and REPLACE HTML partials, now explicitly returning a Promise.
 async function loadAndReplaceHTML(url, elementId) {
@@ -139,7 +119,7 @@ function setTheme(theme) {
   }
 }
 
-// --- NEW: Hashtag Drag and Drop Logic ---
+// --- Hashtag Drag and Drop Logic ---
 function initHashtagDragAndDrop() {
   const containers = document.querySelectorAll(".hashtag-container");
 
@@ -188,7 +168,7 @@ function initHashtagDragAndDrop() {
   }
 }
 
-// --- NEW: Hashtag Toggle Logic ---
+// --- Hashtag Toggle Logic ---
 function initHashtagToggle() {
   const hashtagIcons = document.querySelectorAll(".hashtag .close-icon");
 
@@ -207,6 +187,63 @@ function initHashtagToggle() {
   });
 }
 
+// --- Tooltip Logic ---
+function initTooltips() {
+  const tooltip = document.createElement("div");
+  tooltip.className = "cursor-tooltip";
+  document.body.appendChild(tooltip);
+
+  const tooltipElements = document.querySelectorAll("[data-tooltip]");
+
+  tooltipElements.forEach((element) => {
+    element.addEventListener("mouseenter", (e) => {
+      const tooltipText = element.getAttribute("data-tooltip");
+      tooltip.textContent = tooltipText;
+      tooltip.style.display = "block";
+    });
+
+    element.addEventListener("mouseleave", () => {
+      tooltip.style.display = "none";
+    });
+
+    element.addEventListener("mousemove", (e) => {
+      const tooltipWidth = tooltip.offsetWidth;
+      const tooltipHeight = tooltip.offsetHeight;
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+      const cursorOffset = 15; // A small buffer
+
+      // Default position: above the cursor, horizontally centered
+      let newLeft = e.clientX - tooltipWidth / 2;
+      let newTop = e.clientY - tooltipHeight - cursorOffset;
+
+      // If it overflows the top, flip it to be below the cursor
+      if (newTop < 0) {
+        newTop = e.clientY + cursorOffset;
+      }
+
+      // If it overflows the left, stick it to the left edge
+      if (newLeft < 0) {
+        newLeft = 0;
+      }
+
+      // If it overflows the right, stick it to the right edge
+      if (newLeft + tooltipWidth > viewportWidth) {
+        newLeft = viewportWidth - tooltipWidth;
+      }
+
+      // This case is less likely with the above logic, but as a fallback
+      if (newTop + tooltipHeight > viewportHeight) {
+        newTop = viewportHeight - tooltipHeight;
+      }
+
+      tooltip.style.left = newLeft + "px";
+      tooltip.style.top = newTop + "px";
+    });
+  });
+}
+
+// --- Fortune Logic ---
 function getFortune() {
   if (typeof Module === "undefined" || !Module._minifortune) {
     console.error("Minifortune module not loaded or ready.");
