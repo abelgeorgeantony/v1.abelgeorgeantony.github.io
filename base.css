@@ -216,7 +216,7 @@ html[data-theme="dark"] #theme-toggle .material-icons {
 main {
     padding: 40px 20px;
     max-width: 900px;
-    margin: 50px auto 40px; /* Increased top margin for fixed header */
+    margin: 50px auto 0px; /* Increased top margin for fixed header */
 }
 
 .main-image {
@@ -415,8 +415,7 @@ footer {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding: 4rem 2rem 2rem;
-    margin-top: 2rem;
+    padding: 0rem 2rem 2rem;
     background: linear-gradient(
         to bottom,
         var(--bg-color),
