@@ -12,7 +12,11 @@
         />
         <script src="base.js" defer></script>
         <script src="nav.js" defer></script>
-
+        <script
+            src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"
+            defer
+        ></script>
+        <script src="blog.js" defer></script>
         <script src="quotes/fortunes/cowsay.js" async></script>
         <script>
             var Module = {
@@ -29,47 +33,45 @@
     <body>
         <div id="header-placeholder"></div>
         <main>
-            <section id="blog">
+            <section id="blog-list">
                 <div class="page-header">
                     <h1>Blog</h1>
                     <div class="hashtag-container">
                         <div class="hashtag" draggable="true">
-                            <span>#thoughts</span>
-                            <span class="material-icons close-icon">close</span>
+                            <span>#thoughts</span
+                            ><span class="material-icons close-icon"
+                                >close</span
+                            >
                         </div>
                         <div class="hashtag" draggable="true">
-                            <span>#learnings</span>
-                            <span class="material-icons close-icon">close</span>
+                            <span>#learnings</span
+                            ><span class="material-icons close-icon"
+                                >close</span
+                            >
                         </div>
                         <div class="hashtag" draggable="true">
-                            <span>#technology</span>
-                            <span class="material-icons close-icon">close</span>
+                            <span>#technology</span
+                            ><span class="material-icons close-icon"
+                                >close</span
+                            >
                         </div>
                         <div class="hashtag" draggable="true">
-                            <span>#design</span>
-                            <span class="material-icons close-icon">close</span>
+                            <span>#design</span
+                            ><span class="material-icons close-icon"
+                                >close</span
+                            >
                         </div>
                         <div class="hashtag" draggable="true">
-                            <span>#life</span>
-                            <span class="material-icons close-icon">close</span>
+                            <span>#life</span
+                            ><span class="material-icons close-icon"
+                                >close</span
+                            >
                         </div>
                     </div>
                 </div>
-                <article>
-                    <h2>My First Blog Post</h2>
-                    <p><em>September 9, 2025</em></p>
-                    <p>
-                        This is the content of my first blog post. I'll be
-                        writing about technology, design, and my journey as a
-                        developer.
-                    </p>
-                </article>
-                <hr />
-                <article>
-                    <h2>Another Post</h2>
-                    <p><em>September 10, 2025</em></p>
-                    <p>Here is another entry in my development journal.</p>
-                </article>
+                <div id="blog-posts-container">
+                    <!-- Blog post list will be dynamically loaded here -->
+                </div>
             </section>
         </main>
         <div id="footer-placeholder"></div>
