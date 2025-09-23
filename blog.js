@@ -64,7 +64,12 @@ async function renderBlogList() {
         posts.forEach(post => {
             const postElement = document.createElement('article');
             postElement.className = 'blog-list-item';
-            postElement.innerHTML = "\n                <h2><a href=\"blog.html?post=\".concat(post.filename.replace('.md', ''), \"\">${post.title}</a></h2>\n                <p><em>${post.date}</em></p>\n                <p>${post.summary}</p>\n                <a href=\"blog.html?post=\".concat(post.filename.replace('.md', ''), \"\" class=\"read-more\">Read More &rarr;</a>\n            ";
+            postElement.innerHTML = `
+                <h2><a href="blog.html?post=${post.filename.replace('.md', '')}">${post.title}</a></h2>
+                <p><em>${post.date}</em></p>
+                <p>${post.summary}</p>
+                <a href="blog.html?post=${post.filename.replace('.md', '')}" class="read-more">Read More &rarr;</a>
+            `;
             container.appendChild(postElement);
         });
 
