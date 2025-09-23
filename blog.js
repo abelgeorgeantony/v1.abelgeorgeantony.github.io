@@ -107,7 +107,15 @@ async function renderSinglePost(postName) {
 
         document.title = `${frontmatter.title || 'Blog Post'} - Abel George Antony`;
 
-        container.innerHTML = "\n            <div class=\"page-header\">\n                <h1>${frontmatter.title || 'Untitled Post'}</h1>\n                <p>By ${frontmatter.author || 'Unknown'} on ${frontmatter.date || ''}</p>\n            </div>\n            <div class=\"post-content\">\n                ${content}\n            </div>\n        ";
+        container.innerHTML = `
+            <div class="page-header">
+                <h1>${frontmatter.title || 'Untitled Post'}</h1>
+                <p>By ${frontmatter.author || 'Unknown'} on ${frontmatter.date || ''}</p>
+            </div>
+            <div class="post-content">
+                ${content}
+            </div>
+        `;
     } catch (error) {
         console.error('Error rendering post:', error);
         container.innerHTML = "\n            <div class=\"page-header\">\n                <h1>Post Not Found</h1>\n                <p>Sorry, we couldn't find the post you were looking for.</p>\n            </div>\n        ";
@@ -159,7 +167,12 @@ async function renderSearch() {
                 filteredPosts.forEach(post => {
                     const postElement = document.createElement('article');
                     postElement.className = 'blog-list-item';
-                    postElement.innerHTML = "\n                        <h2><a href=\"blog.html?post=".concat(post.filename.replace('.md', ''), "\">${post.frontmatter.title || 'Untitled Post'}</a></h2>\n                        <p><em>${post.frontmatter.date || ''}</em></p>\n                        <p>${post.frontmatter.summary || ''}</p>\n                    ";
+                    postElement.innerHTML = `
+                        <h2><a href="blog.html?post=${post.filename.replace('.md', '')}">${post.frontmatter.title || 'Untitled Post'}</a></h2>
+                        <p><em>${post.frontmatter.date || ''}</em></p>
+                        <p>${post.frontmatter.summary || ''}</p>
+                        <a href="blog.html?post=${post.filename.replace('.md', '')}" class="read-more">Read More &rarr;</a>
+                    `;
                     resultsContainer.appendChild(postElement);
                 });
             } else {
