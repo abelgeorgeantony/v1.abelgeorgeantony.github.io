@@ -1,117 +1,77 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" href="/images/favicon.ico" />
-        <title>Abel George Antony - Portfolio</title>
-        <link rel="stylesheet" href="base.css" />
-        <link
-            href="https://fonts.googleapis.com/icon?family=Material+Icons"
-            rel="stylesheet"
-        />
-        <script src="base.js" defer></script>
-        <script src="nav.js" defer></script>
-        <script src="quotes/fortunes/cowsay.js" async></script>
-        <script>
-            var Module = {
-                locateFile: function (path) {
-                    return "quotes/fortunes/" + path;
-                },
-                onRuntimeInitialized: function () {
-                    onFortuneModuleReady();
-                },
-            };
-        </script>
-        <script src="quotes/fortunes/libminifortune.js" async></script>
-    </head>
-    <body>
-        <div id="header-placeholder"></div>
-        <main>
-            <img
-                src="images/ontree.jpeg"
-                alt="Abel George Antony"
-                class="main-image"
-            />
-            <section id="about">
-                <div class="page-header">
-                    <h1>About Me</h1>
-                    <div class="hashtag-container">
-                        <div class="hashtag" draggable="true">
-                            <span>#abelgeorgeantony</span
-                            ><span class="material-icons close-icon"
-                                >close</span
-                            >
-                        </div>
-                        <div class="hashtag" draggable="true">
-                            <span>#portfolio</span
-                            ><span class="material-icons close-icon"
-                                >close</span
-                            >
-                        </div>
-                        <div class="hashtag" draggable="true">
-                            <span>#webdev</span
-                            ><span class="material-icons close-icon"
-                                >close</span
-                            >
-                        </div>
-                    </div>
+---
+layout: default
+title: Abel George Antony - Portfolio
+---
+
+<main>
+    <img src="images/ontree.jpeg" alt="Abel George Antony" class="main-image" />
+    <section id="about">
+        <div class="page-header">
+            <h1>About Me</h1>
+            <div class="hashtag-container">
+                <div class="hashtag" draggable="true">
+                    <span>#abelgeorgeantony</span
+                    ><span class="material-icons close-icon">close</span>
                 </div>
-
-                <div class="about-content">
-                    <p>
-                        My name is Abel George Antony and I come from the
-                        <a
-                            href="https://en.wikipedia.org/wiki/Edathua"
-                            target="_blank"
-                            >lowest altitude in India</a
-                        >. Curiosity drives me down many paths, from the
-                        structured logic of computer programming to the abstract
-                        depths of philosophy I've discovered online. I also have
-                        a keen interest in finance; I casually trade in the
-                        Indian stock market to get rid of the excess cash I
-                        have.
-                    </p>
-
-                    <p>
-                        I fell for the
-                        <strong data-tooltip="Open Source">Communist</strong>
-                        propaganda and now daily drive
-                        <strong
-                            data-tooltip="also because it was simple, fun and adventurous than Windows"
-                            >Debian with GNOME</strong
-                        >. Core concepts and philosophies of programming are
-                        what I try to understand rather than just learning
-                        languages. My curiosity also extends to the
-                        <strong
-                            data-tooltip="I disassemble my laptop when I crave to see the insides"
-                            >hardware</strong
-                        >. This hands-on approach has led me to gain experience
-                        with a variety of technologies, including
-                        <strong
-                            >HTML, CSS, JS, Node JS, Express, PHP, Mongo DB, and
-                            SQL</strong
-                        >, as well as languages like <strong>C/C++</strong> and
-                        tools like <strong>Bash, Linux, and Git</strong>.
-                    </p>
-
-                    <div class="about-section">
-                        <h2>Education</h2>
-                        <div class="education-item">
-                            <h3>Bachelor of Computer Applications</h3>
-                            <p>
-                                Bharata Mata College of Commerce and Arts,
-                                Choondy (2023 - Present)
-                            </p>
-                        </div>
-                        <div class="education-item">
-                            <h3>Higher Secondary</h3>
-                            <p>St. Aloysius HSS, Edathua (2021 - 2023)</p>
-                        </div>
-                    </div>
+                <div class="hashtag" draggable="true">
+                    <span>#portfolio</span
+                    ><span class="material-icons close-icon">close</span>
                 </div>
-            </section>
-        </main>
-        <div id="footer-placeholder"></div>
-    </body>
-</html>
+                <div class="hashtag" draggable="true">
+                    <span>#webdev</span
+                    ><span class="material-icons close-icon">close</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-content">
+            <p>
+                My name is Abel George Antony and I come from the
+                <a href="https://en.wikipedia.org/wiki/Edathua" target="_blank"
+                    >lowest altitude in India</a
+                >. Curiosity drives me down many paths, from the structured
+                logic of computer programming to the abstract depths of
+                philosophy I've discovered online. I also have a keen interest
+                in finance; I casually trade in the Indian stock market to get
+                rid of the excess cash I have.
+            </p>
+
+            <p>
+                I fell for the
+                <strong data-tooltip="Open Source">Communist</strong>
+                propaganda and now daily drive
+                <strong
+                    data-tooltip="also because it was simple, fun and adventurous than Windows"
+                    >Debian with GNOME</strong
+                >. Core concepts and philosophies of programming are what I try
+                to understand rather than just learning languages. My curiosity
+                also extends to the
+                <strong
+                    data-tooltip="I disassemble my laptop when I crave to see the insides"
+                    >hardware</strong
+                >. This hands-on approach has led me to gain experience with a
+                variety of technologies, including
+                <strong
+                    >HTML, CSS, JS, Node JS, Express, PHP, Mongo DB, and
+                    SQL</strong
+                >, as well as languages like <strong>C/C++</strong> and tools
+                like <strong>Bash, Linux, and Git</strong>.
+            </p>
+
+            <div class="about-section">
+                <h2>Education</h2>
+                <div class="education-item">
+                    <h3>Bachelor of Computer Applications</h3>
+                    <p>
+                        Bharata Mata College of Commerce and Arts, Choondy (2023
+                        - Present)
+                    </p>
+                </div>
+                <div class="education-item">
+                    <h3>Higher Secondary</h3>
+                    <p>St. Aloysius HSS, Edathua (2021 - 2023)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

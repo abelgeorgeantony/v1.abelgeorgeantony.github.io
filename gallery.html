@@ -1,104 +1,68 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" href="/images/favicon.ico" />
-        <title>Projects - Abel George Antony</title>
-        <link rel="stylesheet" href="base.css" />
-        <link
-            href="https://fonts.googleapis.com/icon?family=Material+Icons"
-            rel="stylesheet"
-        />
-        <script src="base.js" defer></script>
-        <script src="nav.js" defer></script>
+---
+layout: default
+title: Gallery
+---
 
-        <script src="quotes/fortunes/cowsay.js" async></script>
-        <script>
-            var Module = {
-                locateFile: function (path) {
-                    return "quotes/fortunes/" + path;
-                },
-                onRuntimeInitialized: function () {
-                    onFortuneModuleReady();
-                },
-            };
-        </script>
-        <script src="quotes/fortunes/libminifortune.js" async></script>
-    </head>
-    <body>
-        <div id="header-placeholder"></div>
-
-        <main>
-            <img
-                src="images/mona-lisa-vandalised.jpg"
-                alt="Abel George Antony"
-                class="main-image gallery-image"
-            />
-            <section id="gallery-page">
-                <div class="page-header">
-                    <h1>Gallery</h1>
-                    <div class="hashtag-container">
-                        <div class="hashtag" draggable="true">
-                            <span>#pictures</span
-                            ><span class="material-icons close-icon"
-                                >close</span
-                            >
-                        </div>
-                        <div class="hashtag" draggable="true">
-                            <span>#projects</span
-                            ><span class="material-icons close-icon"
-                                >close</span
-                            >
-                        </div>
-                        <div class="hashtag" draggable="true">
-                            <span>#showcase</span
-                            ><span class="material-icons close-icon"
-                                >close</span
-                            >
-                        </div>
-                    </div>
+<main>
+    <img
+        src="images/mona-lisa-vandalised.jpg"
+        alt="Abel George Antony"
+        class="main-image gallery-image"
+    />
+    <section id="gallery-page">
+        <div class="page-header">
+            <h1>Gallery</h1>
+            <div class="hashtag-container">
+                <div class="hashtag" draggable="true">
+                    <span>#pictures</span
+                    ><span class="material-icons close-icon">close</span>
                 </div>
-
-                <div class="instagram-section">
-                    <div class="instagram-header">
-                        <h2>From my Instagram Profile</h2>
-                        <a
-                            href="https://www.instagram.com/abelgeorgeantony"
-                            target="_blank"
-                            >@abelgeorgeantony</a
-                        >
-                    </div>
-                    <!-- LightWidget WIDGET -->
-                    <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
-                    <iframe
-                        src="//lightwidget.com/widgets/8baf0481dde5513f874fc965f7e8c76f.html"
-                        scrolling="no"
-                        allowtransparency="true"
-                        class="lightwidget-widget"
-                        style="width: 100%; border: 0; overflow: hidden"
-                    ></iframe>
+                <div class="hashtag" draggable="true">
+                    <span>#projects</span
+                    ><span class="material-icons close-icon">close</span>
                 </div>
-
-                <hr />
-
-                <div class="projects-section">
-                    <h2>My Projects</h2>
-                    <div class="project-card">
-                        <h3>Just A Calendar</h3>
-                        <p>
-                            Stores the events of users, shows special events,
-                            and partially implemented an AI assistant using
-                            Google APIs.
-                        </p>
-                        <p>
-                            <strong>Tech:</strong> Node JS, Express, Mongo DB,
-                            HTML, CSS, JS
-                        </p>
-                    </div>
+                <div class="hashtag" draggable="true">
+                    <span>#showcase</span
+                    ><span class="material-icons close-icon">close</span>
                 </div>
-            </section>
-        </main>
-        <div id="footer-placeholder"></div>
-    </body>
-</html>
+            </div>
+        </div>
+
+        <div class="instagram-section">
+            <div class="instagram-header">
+                <h2>From my Instagram Profile</h2>
+                <a
+                    href="https://www.instagram.com/abelgeorgeantony"
+                    target="_blank"
+                    >@abelgeorgeantony</a
+                >
+            </div>
+            <!-- LightWidget WIDGET -->
+            <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
+            <iframe
+                src="//lightwidget.com/widgets/8baf0481dde5513f874fc965f7e8c76f.html"
+                scrolling="no"
+                allowtransparency="true"
+                class="lightwidget-widget"
+                style="width: 100%; border: 0; overflow: hidden"
+            ></iframe>
+        </div>
+
+        <hr />
+
+        <div class="projects-section">
+            <h2>My Projects</h2>
+            <div class="project-card">
+                <h3>Just A Calendar</h3>
+                <p>
+                    Stores the events of users, shows special events, and
+                    partially implemented an AI assistant using Google APIs.
+                </p>
+                <p>
+                    <strong>Tech:</strong> Node JS, Express, Mongo DB, HTML,
+                    CSS, JS
+                </p>
+            </div>
+        </div>
+    </section>
+</main>

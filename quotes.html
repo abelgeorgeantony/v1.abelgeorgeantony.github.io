@@ -1,63 +1,34 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" href="/images/favicon.ico" />
-        <title>Quotes - Abel George Antony</title>
-        <link rel="stylesheet" href="base.css" />
-        <link
-            href="https://fonts.googleapis.com/icon?family=Material+Icons"
-            rel="stylesheet"
-        />
-        <script src="base.js" defer></script>
-        <script src="nav.js" defer></script>
-        <script src="quotes.js" defer></script>
+---
+layout: default
+title: Quotes
+---
 
-        <script src="quotes/fortunes/cowsay.js" async></script>
-        <script>
-            var Module = {
-                locateFile: function (path) {
-                    return "quotes/fortunes/" + path;
-                },
-                onRuntimeInitialized: function () {
-                    onFortuneModuleReady();
-                },
-            };
-        </script>
-        <script src="quotes/fortunes/libminifortune.js" async></script>
-    </head>
-    <body>
-        <div id="header-placeholder"></div>
-        <main>
-            <img
-                src="images/diogenes-of-sinope.png"
-                alt="Abel George Antony"
-                class="main-image"
-            />
-            <section id="quotes-container">
-                <div class="page-header">
-                    <h1>Quotes</h1>
-                    <div class="hashtag-container">
-                        <div class="hashtag" draggable="true">
-                            <span>#inspiration</span>
-                            <span class="material-icons close-icon">close</span>
-                        </div>
-                        <div class="hashtag" draggable="true">
-                            <span>#motivation</span>
-                            <span class="material-icons close-icon">close</span>
-                        </div>
-                        <div class="hashtag" draggable="true">
-                            <span>#wisdom</span>
-                            <span class="material-icons close-icon">close</span>
-                        </div>
-                    </div>
+<main>
+    <img
+        src="images/diogenes-of-sinope.png"
+        alt="Abel George Antony"
+        class="main-image"
+    />
+    <section id="quotes-container">
+        <div class="page-header">
+            <h1>Quotes</h1>
+            <div class="hashtag-container">
+                <div class="hashtag" draggable="true">
+                    <span>#inspiration</span>
+                    <span class="material-icons close-icon">close</span>
                 </div>
-                <div id="quotes-grid">
-                    <!-- Quotes will be dynamically loaded here -->
+                <div class="hashtag" draggable="true">
+                    <span>#motivation</span>
+                    <span class="material-icons close-icon">close</span>
                 </div>
-            </section>
-        </main>
-        <div id="footer-placeholder"></div>
-    </body>
-</html>
+                <div class="hashtag" draggable="true">
+                    <span>#wisdom</span>
+                    <span class="material-icons close-icon">close</span>
+                </div>
+            </div>
+        </div>
+        <div id="quotes-grid">
+            <!-- Quotes will be dynamically loaded here -->
+        </div>
+    </section>
+</main>

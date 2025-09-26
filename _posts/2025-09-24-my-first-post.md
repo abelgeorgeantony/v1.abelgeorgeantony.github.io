@@ -1,9 +1,8 @@
 ---
+layout: post
 title: "My First Blog Post"
-date: "2025-09-15"
-author: "Abel George Antony"
-summary: "This is the summary of my first post, where I discuss the beginning of my journey and what's to come."
 ---
+
 
 # My First Post
 

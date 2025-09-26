@@ -1,76 +1,43 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" href="/images/favicon.ico" />
-        <title>Blog - Abel George Antony</title>
-        <link rel="stylesheet" href="base.css" />
-        <link
-            href="https://fonts.googleapis.com/icon?family=Material+Icons"
-            rel="stylesheet"
-        />
-        <script src="base.js" defer></script>
-        <script src="nav.js" defer></script>
+---
+layout: default
+title: Blog
+---
 
-        <script src="blog.js" defer></script>
-        <script src="quotes/fortunes/cowsay.js" async></script>
-        <script>
-            var Module = {
-                locateFile: function (path) {
-                    return "quotes/fortunes/" + path;
-                },
-                onRuntimeInitialized: function () {
-                    onFortuneModuleReady();
-                },
-            };
-        </script>
-        <script src="quotes/fortunes/libminifortune.js" async></script>
-    </head>
-    <body>
-        <div id="header-placeholder"></div>
-        <main>
-            <section id="blog-list">
-                <div class="page-header">
-                    <h1>Blog</h1>
-                    <div class="hashtag-container">
-                        <div class="hashtag" draggable="true">
-                            <span>#thoughts</span
-                            ><span class="material-icons close-icon"
-                                >close</span
-                            >
-                        </div>
-                        <div class="hashtag" draggable="true">
-                            <span>#learnings</span
-                            ><span class="material-icons close-icon"
-                                >close</span
-                            >
-                        </div>
-                        <div class="hashtag" draggable="true">
-                            <span>#technology</span
-                            ><span class="material-icons close-icon"
-                                >close</span
-                            >
-                        </div>
-                        <div class="hashtag" draggable="true">
-                            <span>#design</span
-                            ><span class="material-icons close-icon"
-                                >close</span
-                            >
-                        </div>
-                        <div class="hashtag" draggable="true">
-                            <span>#life</span
-                            ><span class="material-icons close-icon"
-                                >close</span
-                            >
-                        </div>
-                    </div>
-                </div>
-                <div id="blog-posts-container">
-                    <!-- Blog post list will be dynamically loaded here -->
-                </div>
-            </section>
-        </main>
-        <div id="footer-placeholder"></div>
-    </body>
-</html>
+<section id="blog-list">
+    <div class="page-header">
+        <h1>Blog</h1>
+        <div class="hashtag-container">
+            <div class="hashtag" draggable="true">
+                <span>#thoughts</span
+                ><span class="material-icons close-icon">close</span>
+            </div>
+            <div class="hashtag" draggable="true">
+                <span>#learnings</span
+                ><span class="material-icons close-icon">close</span>
+            </div>
+            <div class="hashtag" draggable="true">
+                <span>#technology</span
+                ><span class="material-icons close-icon">close</span>
+            </div>
+            <div class="hashtag" draggable="true">
+                <span>#design</span
+                ><span class="material-icons close-icon">close</span>
+            </div>
+            <div class="hashtag" draggable="true">
+                <span>#life</span
+                ><span class="material-icons close-icon">close</span>
+            </div>
+        </div>
+    </div>
+    <div id="blog-posts-container">
+        <ul>
+            {% for post in site.posts %}
+            <li>
+                <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+                <p>{{ post.excerpt }}</p>
+                <p>{{ post.date | date_to_string }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>

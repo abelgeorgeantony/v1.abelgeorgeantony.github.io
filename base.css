@@ -511,6 +511,10 @@ strong[data-tooltip] {
     .main-image {
         height: 100px;
     }
+
+    html {
+        font-size: 14px;
+    }
 }
 
 /* --- Social Links --- */
@@ -825,4 +829,10 @@ strong[data-tooltip] {
 .project-card h3 {
     margin-top: 0;
     color: var(--primary-color);
+}
+
+/* Hide active navigation link */
+nav ul li.active,
+#mobile-menu ul li.active {
+    display: none;
 }
