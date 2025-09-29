@@ -2,7 +2,7 @@
     <head>
         <title>{{ page.title }}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/images/favicon.ico" type="image/x-icon" />
         <link rel="stylesheet" href="/base.css" />
         <link
             href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -22,7 +22,6 @@
             };
         </script>
         <script src="/quotes/fortunes/libminifortune.js" async></script>
-        <script src="/search.js" defer></script>
         {% if page.url == '/quotes.html' %}
         <script src="/quotes.js" defer></script>
         {% endif %}
@@ -32,25 +31,26 @@
             <nav>
                 <div class="nav-left-container">
                     <h1 id="header-page-name"></h1>
-                    <h1 id="header-my-name">
-                        <span class="separator"> | </span>
-                        Abel George Antony
-                    </h1>
+                    <span class="separator"> | </span>
+                    <h1 id="header-my-name">Abel George Antony</h1>
                 </div>
                 <div class="nav-right-container">
-                    {% if page.url == '/blogs.html' or page.layout == 'post' %}
-                    <input
-                        type="text"
-                        id="search-input"
-                        placeholder="Search..."
-                    />
-                    {% endif %}
                     <ul id="desktop-nav">
-                        <li {% if page.url == '/index.html' or page.url == '/' %}class="active"{% endif %}><a href="/index.html">About</a></li>
-                        <li {% if page.url == '/blogs.html' %}class="active"{% endif %}><a href="/blogs.html">Blogs</a></li>
-                        <li {% if page.url == '/quotes.html' %}class="active"{% endif %}><a href="/quotes.html">Quotes</a></li>
-                        <li {% if page.url == '/gallery.html' %}class="active"{% endif %}><a href="/gallery.html">Gallery</a></li>
-                        <li {% if page.url == '/contact.html' %}class="active"{% endif %}><a href="/contact.html">Contact</a></li>
+                        <li {% if page.url == "/index.html" or page.url == "/" %}class="active"{% endif %}>
+                            <a href="/index.html">About</a>
+                        </li>
+                        <li {% if page.url == "/blogs.html" %}class="active"{% endif %}>
+                            <a href="/blogs.html">Blogs</a>
+                        </li>
+                        <li {% if page.url == "/quotes.html" %}class="active"{% endif %}>
+                            <a href="/quotes.html">Quotes</a>
+                        </li>
+                        <li {% if page.url == "/gallery.html" %}class="active"{% endif %}>
+                            <a href="/gallery.html">Gallery</a>
+                        </li>
+                        <li {% if page.url == "/contact.html" %}class="active"{% endif %}>
+                            <a href="/contact.html">Contact</a>
+                        </li>
                     </ul>
                     <button id="hamburger-btn" aria-label="Open Menu">
                         <span class="material-icons">menu</span>
@@ -61,40 +61,35 @@
                     </div>
                 </div>
             </nav>
-            {% if page.url == '/blogs.html' or page.layout == 'post' %}
-            <div id="search-results-container">
-                <ul id="search-results"></ul>
-            </div>
-            {% endif %}
             <div id="mobile-menu">
                 <button id="close-btn" aria-label="Close Menu">
                     <span class="material-icons">close</span>
                 </button>
                 <ul>
-                    <li {% if page.url == '/index.html' or page.url == '/' %}class="active"{% endif %}>
+                    <li {% if page.url == "/index.html" or page.url == "/" %}class="active"{% endif %}>
                         <a href="/index.html"
                             ><span class="material-icons">mood</span>|About</a
                         >
                     </li>
-                    <li {% if page.url == '/blogs.html' %}class="active"{% endif %}>
+                    <li {% if page.url == "/blogs.html" %}class="active"{% endif %}>
                         <a href="/blogs.html"
                             ><span class="material-icons">auto_stories</span
                             >|Blogs</a
                         >
                     </li>
-                    <li {% if page.url == '/quotes.html' %}class="active"{% endif %}>
+                    <li {% if page.url == "/quotes.html" %}class="active"{% endif %}>
                         <a href="/quotes.html"
                             ><span class="material-icons">format_quote</span
                             >|Quotes</a
                         >
                     </li>
-                    <li {% if page.url == '/gallery.html' %}class="active"{% endif %}>
+                    <li {% if page.url == "/gallery.html" %}class="active"{% endif %}>
                         <a href="/gallery.html"
                             ><span class="material-icons">image</span
                             >|Gallery</a
                         >
                     </li>
-                    <li {% if page.url == '/contact.html' %}class="active"{% endif %}>
+                    <li {% if page.url == "/contact.html" %}class="active"{% endif %}>
                         <a href="/contact.html"
                             ><span class="material-icons">mail</span>|Contact</a
                         >
@@ -115,9 +110,9 @@
                 <p>
                     Vibe-Coded with patience using
                     <a href="https://gemini.google.com">Gemini</a
-                    ><span class="separator"> | </span>Icons are
+                    ><span class="normal-separator"> | </span>Icons are
                     <a href="https://fonts.google.com/icons">Material Icons</a
-                    ><span class="separator"> | </span>Font is
+                    ><span class="normal-separator"> | </span>Font is
                     <a href="https://fonts.google.com/specimen/Inter">Inter</a>
                 </p>
                 <div class="color-palette">

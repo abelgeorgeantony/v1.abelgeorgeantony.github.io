@@ -79,13 +79,17 @@ nav {
 .nav-left-container {
     display: flex;
     align-items: center;
-    gap: 10px;
 }
 
 .nav-left-container h1 {
     margin: 0; /* Remove default h1 margin */
     font-size: 1.1rem;
     padding: 0;
+}
+.separator {
+    font-size: 2em;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 nav ul {
@@ -216,7 +220,7 @@ html[data-theme="dark"] #theme-toggle .material-icons {
 main {
     padding: 40px 20px;
     max-width: 900px;
-    margin: 50px auto 0px; /* Increased top margin for fixed header */
+    margin: 1px auto 0px; /* Increased top margin for fixed header */
 }
 
 .main-image {
@@ -228,6 +232,9 @@ main {
 }
 .gallery-image {
     object-position: 0% 32%;
+}
+.blogs-image {
+    object-position: 0% 16%;
 }
 
 section {
@@ -835,4 +842,10 @@ strong[data-tooltip] {
 nav ul li.active,
 #mobile-menu ul li.active {
     display: none;
+}
+
+.email-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }

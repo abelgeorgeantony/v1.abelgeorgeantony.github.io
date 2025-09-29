@@ -13,12 +13,12 @@ function init() {
     return;
   }
 
-  const separator = headerMyName.querySelector(".separator");
+  const separator = document.querySelector(".nav-left-container .separator");
   const sections = document.querySelectorAll("section[id]");
   const navBar = document.querySelector("header");
 
-  if (!navBar) {
-    console.error("Header element not found.");
+  if (!navBar || !separator) {
+    console.error("Header or separator element not found.");
     return;
   }
 
@@ -44,16 +44,20 @@ function init() {
 
     headerPageName.textContent = currentSectionTitle;
 
+    if (headerPageName.textContent && !isMobile) {
+      separator.style.display = "inline";
+    } else {
+      separator.style.display = "none";
+    }
+
     if (activeSectionFound) {
       if (isMobile) {
         headerMyName.style.display = "none";
       } else {
         headerMyName.style.display = "inline-block";
-        separator.style.display = "inline";
       }
     } else {
       headerMyName.style.display = "inline-block";
-      separator.style.display = "none";
     }
   }
 
