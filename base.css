@@ -218,7 +218,7 @@ html[data-theme="dark"] #theme-toggle .material-icons {
 
 /* --- Main Content --- */
 main {
-    padding: 40px 20px;
+    padding: 75px 20px;
     max-width: 900px;
     margin: 1px auto 0px; /* Increased top margin for fixed header */
 }
