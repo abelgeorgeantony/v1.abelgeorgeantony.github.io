@@ -33,6 +33,16 @@ document.addEventListener("DOMContentLoaded", async function () {
       setTheme("dark");
     }
   });
+  document
+    .getElementById("theme-toggle-mobile")
+    .addEventListener("click", () => {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      if (currentTheme === "dark") {
+        setTheme("light");
+      } else {
+        setTheme("dark");
+      }
+    });
 
   initHashtagDragAndDrop();
   initHashtagToggle();
@@ -57,11 +67,17 @@ function setTheme(theme) {
     document.documentElement.setAttribute("data-theme", "dark");
     document.getElementById("theme-toggle").querySelector("span").textContent =
       "bedtime";
+    document
+      .getElementById("theme-toggle-mobile")
+      .querySelector("span").textContent = "bedtime";
     document.cookie = "theme=dark; path=/; max-age=31536000";
   } else {
     document.documentElement.removeAttribute("data-theme");
     document.getElementById("theme-toggle").querySelector("span").textContent =
       "light_mode";
+    document
+      .getElementById("theme-toggle-mobile")
+      .querySelector("span").textContent = "light_mode";
     document.cookie = "theme=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
   }
 }

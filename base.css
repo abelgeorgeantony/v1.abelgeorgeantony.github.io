@@ -504,9 +504,44 @@ strong[data-tooltip] {
 }
 
 /* --- Media Queries for Responsiveness --- */
+.mobile-only {
+    display: none;
+}
+
+.desktop-only {
+    visibility: visible;
+    position: static;
+}
+
+.mobile-only {
+    visibility: hidden;
+    position: absolute;
+}
+
 @media (max-width: 768px) {
     /* Hide the desktop navigation on mobile */
     #desktop-nav {
+        display: none;
+    }
+    .desktop-only {
+        visibility: hidden;
+        position: absolute;
+    }
+    .mobile-only {
+        visibility: visible;
+        display: flex;
+        top: 18px;
+        right: 80px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+    }
+
+    .mobile-only span {
+        color: var(--text-color);
+    }
+
+    .separator {
         display: none;
     }
 
