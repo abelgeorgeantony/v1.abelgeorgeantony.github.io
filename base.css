@@ -186,34 +186,88 @@ body.menu-open {
 }
 
 /* --- Theme Toggle Button --- */
-#theme-toggle {
-    right: 0;
+.theme-toggle-button {
+    background-color: var(--alt-bg-color);
+    color: var(--text-color);
+    border: none;
+    padding: 5px 10px;
+    border-radius: 8px;
     cursor: pointer;
-    width: 40px;
-    height: 40px;
-    background-color: transparent;
-    border-radius: 50%;
+    font-weight: bold;
+    font-size: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
     transition:
         background-color 0.3s ease,
-        transform 0.3s ease;
+        transform 0.2s ease;
 }
 
-#theme-toggle:hover {
-    background-color: var(--alt-bg-color);
+.theme-toggle-button:hover {
+    background-color: var(--link-hover-color);
+    transform: translateY(-2px);
 }
 
-#theme-toggle .material-icons {
-    color: var(--text-color);
-    transition:
-        color 0.3s ease,
-        transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-html[data-theme="dark"] #theme-toggle .material-icons {
+html[data-theme="dark"] .theme-toggle-button .material-icons {
     transform: rotate(180deg);
+}
+
+/* --- Custom Scrollbar --- */
+html {
+    scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+#custom-scrollbar-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 2001;
+}
+
+.scrollbar-line {
+    width: 100%;
+    height: 4px;
+    background-color: var(--alt-bg-color);
+    transition:
+        width 0.2s ease-in-out,
+        background-color 0.2s ease-in-out;
+}
+
+body.menu-open #custom-scrollbar-container {
+    display: none;
+}
+
+body.menu-open #custom-scrollbar-container {
+    display: none;
+}
+
+.scrollbar-line.active {
+    width: 150%;
+    background-color: var(--primary-color);
+}
+
+.scrollbar-line.near-1 {
+    width: 130%;
+}
+
+.scrollbar-line.near-2 {
+    width: 115%;
+}
+
+.scrollbar-line.near-3 {
+    width: 105%;
+}
+
+body.menu-open #custom-scrollbar-container {
+    display: none;
 }
 
 /* --- Main Content --- */
@@ -519,6 +573,10 @@ strong[data-tooltip] {
 }
 
 @media (max-width: 768px) {
+    #custom-scrollbar-container {
+        width: 18px;
+    }
+
     /* Hide the desktop navigation on mobile */
     #desktop-nav {
         display: none;
@@ -529,12 +587,10 @@ strong[data-tooltip] {
     }
     .mobile-only {
         visibility: visible;
+        position: absolute;
         display: flex;
         top: 18px;
         right: 80px;
-        background: transparent;
-        border: none;
-        cursor: pointer;
     }
 
     .mobile-only span {

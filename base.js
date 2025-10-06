@@ -47,6 +47,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   initHashtagDragAndDrop();
   initHashtagToggle();
   initTooltips();
+  initLineScrollbar();
 });
 
 function isSmallScreen() {
@@ -206,6 +207,60 @@ function initTooltips() {
   });
 }
 
+function initLineScrollbar() {
+  const container = document.getElementById("custom-scrollbar-container");
+  const header = document.querySelector("header");
+
+  // Ensure the header is loaded before getting its height
+  setTimeout(() => {
+    const headerHeight = header.offsetHeight;
+    container.style.top = `${headerHeight}px`;
+    container.style.height = `calc(100% - ${headerHeight}px)`;
+  }, 100);
+
+  const numLines = 50;
+  const peakSize = 3; // Number of lines to include in the peak on each side
+  let lines = [];
+
+  for (let i = 0; i < numLines; i++) {
+    const line = document.createElement("div");
+    line.className = "scrollbar-line";
+    container.appendChild(line);
+    lines.push(line);
+
+    line.addEventListener("click", () => {
+      const scrollPercentage = i / (numLines - 1);
+      const scrollHeight = document.body.scrollHeight - window.innerHeight;
+      const scrollTop = scrollPercentage * scrollHeight;
+      window.scrollTo({
+        top: scrollTop,
+      });
+    });
+  }
+
+  function updateScrollbar() {
+    const scrollTop = window.scrollY;
+    const scrollHeight = document.body.scrollHeight - window.innerHeight;
+    const scrollPercentage = scrollTop / scrollHeight;
+    const activeIndex = Math.floor(scrollPercentage * (numLines - 1) + 0.5);
+
+    lines.forEach((line, index) => {
+      line.classList.remove("active", "near-1", "near-2", "near-3");
+
+      if (index === activeIndex) {
+        line.classList.add("active");
+      } else {
+        const distance = Math.abs(index - activeIndex);
+        if (distance <= peakSize) {
+          line.classList.add(`near-${distance}`);
+        }
+      }
+    });
+  }
+
+  window.addEventListener("scroll", updateScrollbar);
+  updateScrollbar();
+}
 // --- Fortune Logic ---
 function getFortune() {
   if (typeof Module === "undefined" || !Module._minifortune) {
