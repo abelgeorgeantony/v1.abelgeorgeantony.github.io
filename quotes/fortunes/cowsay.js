@@ -149,7 +149,7 @@ function cowsay(text) {
 
   // Generate the balloon and the cow
   if (isSmallScreen()) {
-    const balloon = sayBalloon(text, 26);
+    const balloon = sayBalloon(text, 20);
     const cow = replacer(defaultCow, face);
 
     // Return the final raw string with standard spaces and newlines
