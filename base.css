@@ -27,6 +27,10 @@
     --link-hover-color: #0064ff; /* Lighter Teal */
 }
 
+html {
+    font-size: 16px;
+}
+
 .material-icons {
     line-height: unset !important;
 }
@@ -225,7 +229,7 @@ html {
     position: fixed;
     top: 0;
     right: 0;
-    width: 24px;
+    width: 18px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -611,7 +615,7 @@ strong[data-tooltip] {
     }
 
     html {
-        font-size: 14px;
+        font-size: 16px;
     }
 }
 
@@ -878,7 +882,6 @@ strong[data-tooltip] {
 }
 
 .about-section ul li {
-    font-size: 1rem;
     line-height: 1.7;
 }
 

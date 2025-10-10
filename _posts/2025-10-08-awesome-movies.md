@@ -3,8 +3,6 @@ layout: post
 title: "Awesome Movies(For me)"
 ---
 
-
-# Awesome Movies
 ## The following is a list of movies that I would love to rewatch.
 
 - ## *The Matrix series*
