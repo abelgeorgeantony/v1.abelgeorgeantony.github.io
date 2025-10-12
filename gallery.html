@@ -3,64 +3,112 @@ layout: default
 title: Gallery
 ---
 
-    <img
-        src="images/mona-lisa-vandalised.jpg"
-        alt="Abel George Antony"
-        class="main-image gallery-image"
-    />
-    <section id="gallery-page">
-        <div class="page-header">
-            <h1>Gallery</h1>
-            <div class="hashtag-container">
-                <div class="hashtag" draggable="true">
-                    <span>#pictures</span
-                    ><span class="material-icons close-icon">close</span>
-                </div>
-                <div class="hashtag" draggable="true">
-                    <span>#projects</span
-                    ><span class="material-icons close-icon">close</span>
-                </div>
-                <div class="hashtag" draggable="true">
-                    <span>#showcase</span
-                    ><span class="material-icons close-icon">close</span>
-                </div>
+<img
+    src="images/mona-lisa-vandalised.jpg"
+    alt="Abel George Antony"
+    class="main-image gallery-image"
+/>
+<section id="gallery-page">
+    <div class="page-header">
+        <h1>Gallery</h1>
+        <div class="hashtag-container">
+            <div class="hashtag" draggable="true">
+                <span>#pictures</span
+                ><span class="material-icons close-icon">close</span>
+            </div>
+            <div class="hashtag" draggable="true">
+                <span>#projects</span
+                ><span class="material-icons close-icon">close</span>
+            </div>
+            <div class="hashtag" draggable="true">
+                <span>#showcase</span
+                ><span class="material-icons close-icon">close</span>
             </div>
         </div>
+    </div>
 
-        <div class="instagram-section">
-            <div class="instagram-header">
-                <h2>From my Instagram Profile</h2>
-                <a
-                    href="https://www.instagram.com/abelgeorgeantony"
-                    target="_blank"
-                    >@abelgeorgeantony</a
-                >
-            </div>
-            <!-- LightWidget WIDGET -->
-            <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
-            <iframe
-                src="//lightwidget.com/widgets/8baf0481dde5513f874fc965f7e8c76f.html"
-                scrolling="no"
-                allowtransparency="true"
-                class="lightwidget-widget"
-                style="width: 100%; border: 0; overflow: hidden"
-            ></iframe>
+    <div class="image-grid">
+        <div class="image-grid-item">
+            <img src="images/instagram/image01.jpeg" alt="image01" />
         </div>
-
-        <hr />
-
-        <div class="projects-section">
-            <h2>My Projects</h2>
-            <div class="project-card">
-                <h3>Just A Calendar</h3>
-                <p>
-                    Stores the events of users, shows special events, and
-                    partially implemented an AI assistant using Google APIs.
-                </p>
-                <p>
-                    <strong>Tech:</strong> Node JS, Express, Mongo DB, HTML,
-                    CSS, JS
-                </p>
-            </div>
+        <div class="image-grid-item">
+            <img src="images/instagram/image02.jpeg" alt="image02" />
         </div>
-    </section>
+        <div class="image-grid-item">
+            <img src="images/instagram/image03.jpeg" alt="image03" />
+        </div>
+        <div class="image-grid-item">
+            <img src="images/instagram/image07.jpeg" alt="image07" />
+        </div>
+        <div class="image-grid-item">
+            <img src="images/instagram/image08.jpg" alt="image08" />
+        </div>
+        <div class="image-grid-item">
+            <img src="images/instagram/image09.jpg" alt="image09" />
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="projects-section">
+        <h2>My Projects</h2>
+        <div class="project-card">
+            <h3>Just A Calendar</h3>
+            <p>
+                Stores the events of users, shows special events, and partially
+                implemented an AI assistant using Google APIs.
+            </p>
+            <p>
+                <strong>Tech:</strong> Node JS, Express, Mongo DB, HTML, CSS, JS
+            </p>
+        </div>
+    </div>
+
+    <div class="image-grid">
+        <div class="image-grid-item">
+            <img src="images/instagram/image04.jpeg" alt="image04" />
+        </div>
+        <div class="image-grid-item">
+            <img src="images/instagram/image05.jpg" alt="image05" />
+        </div>
+        <div class="image-grid-item">
+            <img src="images/instagram/image06.jpg" alt="image06" />
+        </div>
+        <div class="image-grid-item">
+            <img src="images/instagram/image10.jpeg" alt="image10" />
+        </div>
+        <div class="image-grid-item">
+            <img src="images/instagram/image11.jpeg" alt="image11" />
+        </div>
+        <div class="image-grid-item">
+            <img src="images/instagram/image12.jpeg" alt="image12" />
+        </div>
+        <div class="image-grid-item">
+            <img src="images/instagram/image13.jpeg" alt="image13" />
+        </div>
+        <div class="image-grid-item">
+            <img src="images/instagram/image14.jpeg" alt="image14" />
+        </div>
+        <div class="image-grid-item">
+            <img src="images/instagram/image15.jpeg" alt="image15" />
+        </div>
+        <div class="image-grid-item">
+            <img src="images/instagram/image16.jpeg" alt="image16" />
+        </div>
+        <div class="image-grid-item">
+            <img src="images/instagram/image17.jpeg" alt="image17" />
+        </div>
+        <div class="image-grid-item">
+            <img src="images/instagram/image18.jpg" alt="image18" />
+        </div>
+    </div>
+</section>
+
+<div id="image-viewer" class="image-viewer-hidden">
+    <span class="close-viewer">&times;</span>
+    <img class="modal-content" id="full-image" />
+    <a class="prev">&#10094;</a>
+    <a class="next">&#10095;</a>
+</div>
+
+<script src="/gallery.js"></script>
