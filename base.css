@@ -287,6 +287,7 @@ main {
     object-fit: cover;
     border-radius: 8px;
     margin: 0;
+    cursor: pointer;
 }
 .gallery-image {
     object-position: 0% 32%;
@@ -621,6 +622,14 @@ strong[data-tooltip] {
 
     html {
         font-size: 16px;
+    }
+
+    .image-container {
+        flex-direction: column !important;
+        margin-top: 25%;
+    }
+    #caption {
+        padding-left: 0 !important;
     }
 }
 
@@ -1042,6 +1051,28 @@ nav ul li.active,
 
 .email-link {
     display: flex;
+
     align-items: center;
+
     gap: 0.5rem;
+}
+
+#caption {
+    text-align: center;
+
+    color: #ccc;
+
+    padding: 10px 0;
+
+    height: 150px;
+    padding-left: 7%;
+}
+
+.image-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10%;
+    margin-left: 10%;
 }
