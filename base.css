@@ -971,13 +971,38 @@ strong[data-tooltip] {
     font-size: 40px;
     font-weight: bold;
     transition: 0.3s;
+    z-index: 3002;
 }
-
 .close-viewer:hover,
 .close-viewer:focus {
     color: #bbb;
     text-decoration: none;
     cursor: pointer;
+}
+
+.image-inspection-controls {
+    position: absolute;
+    top: 20px;
+    right: 70px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    z-index: 3002;
+}
+
+.image-inspection-controls button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.image-inspection-controls button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .prev,

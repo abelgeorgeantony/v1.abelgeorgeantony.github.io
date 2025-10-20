@@ -19,9 +19,13 @@ const imageViewer = {
       return;
     }
 
-    this.closeButton.addEventListener("click", () => this.close());
+    this.closeButton.addEventListener("click", () => {
+      this.fullImage.style.transform = `scale(1)`;
+      this.close();
+    });
     this.viewer.addEventListener("click", (e) => {
       if (e.target === this.viewer) {
+        this.fullImage.style.transform = `scale(1)`;
         this.close();
       }
     });
@@ -122,4 +126,59 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function setupImageViewer(selector, withNavigation) {
   imageViewer.addImages(selector, withNavigation);
+}
+
+/**
+ * Gets the current scale of an element.
+ * @param {HTMLElement} element The element to check.
+ * @returns {number} The current scale value, defaults to 1.
+ */
+function getCurrentScale(element) {
+  // getComputedStyle is more robust as it gets the actual rendered style
+  const transform = window.getComputedStyle(element).transform;
+
+  // If there's no transform or it's 'none', the scale is 1
+  if (transform === "none") {
+    return 1;
+  }
+
+  // The transform value is a matrix, e.g., "matrix(1.1, 0, 0, 1.1, 0, 0)"
+  // The first value is the scaleX, which is what we need.
+  const matrixValues = transform.match(/matrix.*\((.+)\)/)[1].split(", ");
+  return parseFloat(matrixValues[0]);
+}
+
+/**
+ * Incrementally zooms in on an element by 0.1.
+ * @param {string} elementId The ID of the HTML element to zoom.
+ */
+function zoomIn(elementId = "full-image") {
+  const element = document.getElementById(elementId);
+  let currentScale = getCurrentScale(element);
+
+  // Add 0.1 to the current scale
+  let newScale = currentScale + 0.1;
+
+  // Apply the new scale. .toFixed(2) prevents floating point rounding errors.
+  element.style.transform = `scale(${newScale.toFixed(2)})`;
+}
+
+/**
+ * Incrementally zooms out an element by 0.1.
+ * @param {string} elementId The ID of the HTML element to zoom.
+ */
+function zoomOut(elementId = "full-image") {
+  const element = document.getElementById(elementId);
+  let currentScale = getCurrentScale(element);
+
+  // Subtract 0.1 from the current scale
+  let newScale = currentScale - 0.1;
+
+  // Optional: Prevent the image from becoming too small or inverted
+  if (newScale < 0.2) {
+    newScale = 0.2;
+  }
+
+  // Apply the new scale.
+  element.style.transform = `scale(${newScale.toFixed(2)})`;
 }
