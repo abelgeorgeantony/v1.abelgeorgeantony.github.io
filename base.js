@@ -48,7 +48,131 @@ document.addEventListener("DOMContentLoaded", async function () {
   initHashtagToggle();
   initTooltips();
   initLineScrollbar();
+  initCustomContextMenu(); // Initialize the custom context menu
 });
+
+// --- Custom Context Menu Logic ---
+function initCustomContextMenu() {
+  const customContextMenu = document.getElementById("custom-context-menu");
+  const showBrowserMenuOption = document.getElementById(
+    "context-show-browser-menu",
+  );
+  let nativeContextMenuRequested = false;
+  let lastContextMenuEvent = null;
+
+  // Helper function to trigger a contextmenu event (now internal)
+  const triggerContextMenu = function (targetElement, clientX, clientY) {
+    nativeContextMenuRequested = true; // Set flag to allow native menu for the *next* contextmenu event
+
+    // Dispatch mousedown event
+    // Dispatch mousedown event
+    targetElement.dispatchEvent(
+      new MouseEvent("mousedown", {
+        bubbles: true,
+        cancelable: true,
+        clientX: clientX,
+        clientY: clientY,
+        button: 2, // Right mouse button
+        buttons: 2,
+      }),
+    );
+
+    // Dispatch mouseup event (this is what often triggers the native contextmenu)
+    targetElement.dispatchEvent(
+      new MouseEvent("mouseup", {
+        bubbles: true,
+        cancelable: true,
+        clientX: clientX,
+        clientY: clientY,
+        button: 2, // Right mouse button
+        buttons: 2,
+      }),
+    );
+
+    // Ensure the flag is reset after a short delay, even if the native menu doesn't show immediately.
+    setTimeout(() => {
+      nativeContextMenuRequested = false;
+    }, 100); // 100ms should be enough for the browser to process the mouse events.
+
+    // The `contextmenu` event should now naturally follow these mouse events,
+    // and `handleDocumentContextMenu` will allow it to proceed.
+  };
+
+  // Define the main contextmenu handler directly
+  const handleDocumentContextMenu = function (e) {
+    // console.log("handleDocumentContextMenu fired. nativeContextMenuRequested:", nativeContextMenuRequested); // Debugging
+    if (nativeContextMenuRequested) {
+      nativeContextMenuRequested = false; // Reset the flag after allowing native menu to show
+      return; // Allow native context menu to show
+    }
+    e.preventDefault(); // Prevent default browser context menu
+    lastContextMenuEvent = e; // Store the event
+
+    customContextMenu.style.display = "block";
+
+    // Position the menu
+    let left = e.clientX;
+    let top = e.clientY;
+
+    // Ensure menu stays within viewport
+    const menuWidth = customContextMenu.offsetWidth;
+    const menuHeight = customContextMenu.offsetHeight;
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+
+    if (left + menuWidth > viewportWidth) {
+      left = viewportWidth - menuWidth;
+    }
+    if (top + menuHeight > viewportHeight) {
+      top = viewportHeight - menuHeight;
+    }
+
+    customContextMenu.style.left = `${left}px`;
+    customContextMenu.style.top = `${top}px`;
+  };
+
+  // Add the main contextmenu handler
+  document.addEventListener("contextmenu", handleDocumentContextMenu);
+
+  document.addEventListener("click", function (e) {
+    // Hide the custom context menu if clicking outside of it
+    if (
+      customContextMenu.style.display === "block" &&
+      !customContextMenu.contains(e.target)
+    ) {
+      customContextMenu.style.display = "none";
+    }
+  });
+
+  // Option to show the browser's default context menu
+  if (showBrowserMenuOption) {
+    showBrowserMenuOption.addEventListener("click", function () {
+      // console.log("Show Browser Menu clicked."); // Debugging
+      customContextMenu.style.display = "none"; // Hide custom menu
+      if (lastContextMenuEvent) {
+        // Set flag and trigger the context menu event using the helper
+        triggerContextMenu(
+          lastContextMenuEvent.target,
+          lastContextMenuEvent.clientX,
+          lastContextMenuEvent.clientY,
+        );
+        // The flag will be reset in handleDocumentContextMenu
+      }
+    });
+  }
+
+  // Generic click handlers for other custom options (for now)
+  const customOptions = customContextMenu.querySelectorAll(
+    ".custom-context-menu-item:not(#context-show-browser-menu)",
+  );
+  customOptions.forEach((option) => {
+    option.addEventListener("click", function () {
+      console.log(`Custom Option Clicked: ${this.textContent}`);
+      customContextMenu.style.display = "none";
+      // Add specific functionality for each option later
+    });
+  });
+}
 
 function isSmallScreen() {
   // You can adjust the 768px breakpoint as needed
@@ -91,17 +215,21 @@ function initHashtagDragAndDrop() {
     const draggables = container.querySelectorAll(".hashtag");
 
     draggables.forEach((draggable) => {
-      draggable.addEventListener("dragstart", () => {
+      draggable.addEventListener("dragstart", (e) => {
         draggable.classList.add("dragging");
+        e.dataTransfer.effectAllowed = "move"; // Indicate a move operation
+        // document.body.style.cursor manipulations removed as they are ineffective for the drag image itself
       });
 
       draggable.addEventListener("dragend", () => {
         draggable.classList.remove("dragging");
+        // document.body.style.cursor manipulations removed as they are ineffective for the drag image itself
       });
     });
 
     container.addEventListener("dragover", (e) => {
       e.preventDefault();
+      // document.body.style.cursor manipulations removed as they are ineffective for the drag image itself
       const afterElement = getDragAfterElement(container, e.clientX);
       const draggable = document.querySelector(".dragging");
       if (afterElement == null) {

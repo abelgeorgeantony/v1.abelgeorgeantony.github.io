@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Awesome Movies(For me)"
+title: "Awesome Movies"
 ---
 
 ## The following is a list of movies that I would love to rewatch.
