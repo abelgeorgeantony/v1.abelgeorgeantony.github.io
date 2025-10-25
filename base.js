@@ -90,9 +90,9 @@ function initCustomContextMenu() {
     );
 
     // Ensure the flag is reset after a short delay, even if the native menu doesn't show immediately.
-    setTimeout(() => {
-      nativeContextMenuRequested = false;
-    }, 100); // 100ms should be enough for the browser to process the mouse events.
+    //setTimeout(() => {
+    //nativeContextMenuRequested = false;
+    //}, 100); // 100ms should be enough for the browser to process the mouse events.
 
     // The `contextmenu` event should now naturally follow these mouse events,
     // and `handleDocumentContextMenu` will allow it to proceed.
@@ -117,11 +117,15 @@ function initCustomContextMenu() {
     // Ensure menu stays within viewport
     const menuWidth = customContextMenu.offsetWidth;
     const menuHeight = customContextMenu.offsetHeight;
+    const customScrollbar = document.getElementById(
+      "custom-scrollbar-container",
+    );
+    const scrollbarWidth = customScrollbar ? customScrollbar.offsetWidth : 0;
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
 
-    if (left + menuWidth > viewportWidth) {
-      left = viewportWidth - menuWidth;
+    if (left + menuWidth > viewportWidth - scrollbarWidth) {
+      left = viewportWidth - scrollbarWidth - menuWidth;
     }
     if (top + menuHeight > viewportHeight) {
       top = viewportHeight - menuHeight;
@@ -335,7 +339,7 @@ function initTooltips() {
   });
 }
 
-function initLineScrollbar() {
+/*function initLineScrollbar() {
   const container = document.getElementById("custom-scrollbar-container");
   const header = document.querySelector("header");
 
@@ -388,7 +392,120 @@ function initLineScrollbar() {
 
   window.addEventListener("scroll", updateScrollbar);
   updateScrollbar();
+}*/
+function initLineScrollbar() {
+  const container = document.getElementById("custom-scrollbar-container");
+  const header = document.querySelector("header");
+
+  // Ensure the header is loaded before getting its height
+  setTimeout(() => {
+    const headerHeight = header.offsetHeight;
+    container.style.top = `${headerHeight}px`;
+    container.style.height = `calc(100% - ${headerHeight}px)`;
+  }, 100);
+
+  const numLines = 50;
+  const peakSize = 3; // Number of lines to include in the peak on each side
+  let lines = [];
+  let isDraggingScrollbar = false;
+  let startY = 0;
+  let startScrollTop = 0;
+
+  for (let i = 0; i < numLines; i++) {
+    const line = document.createElement("div");
+    line.className = "scrollbar-line";
+    container.appendChild(line);
+    lines.push(line);
+
+    line.addEventListener("click", (e) => {
+      // Prevent drag-start from triggering a click scroll if it was a drag
+      if (isDraggingScrollbar) {
+        isDraggingScrollbar = false;
+        return;
+      }
+      const scrollPercentage = i / (numLines - 1);
+      const scrollHeight = document.body.scrollHeight - window.innerHeight;
+      const scrollTop = scrollPercentage * scrollHeight;
+      window.scrollTo({
+        top: scrollTop,
+        behavior: "smooth",
+      });
+    });
+
+    line.addEventListener("mousedown", (e) => {
+      // Only initiate drag if the active line is clicked
+      if (line.classList.contains("active")) {
+        isDraggingScrollbar = true;
+        startY = e.clientY;
+        startScrollTop = window.scrollY;
+
+        // Prevent text selection during drag
+        e.preventDefault();
+
+        const onMouseMove = (moveEvent) => {
+          if (!isDraggingScrollbar) return;
+
+          const deltaY = moveEvent.clientY - startY;
+          const scrollHeight = document.body.scrollHeight - window.innerHeight;
+          const scrollbarHeight = container.offsetHeight; // Height of the visual scrollbar area
+
+          // Calculate the scroll percentage based on mouse movement relative to scrollbar height
+          // This factor scales the mouse movement to the full page scroll height
+          const scrollFactor = scrollHeight / scrollbarHeight;
+          const newScrollTop = startScrollTop + deltaY * scrollFactor;
+
+          // Clamp newScrollTop to valid range
+          const clampedScrollTop = Math.max(
+            0,
+            Math.min(scrollHeight, newScrollTop),
+          );
+
+          window.scrollTo({
+            top: clampedScrollTop,
+          });
+        };
+
+        const onMouseUp = () => {
+          isDraggingScrollbar = false;
+          document.removeEventListener("mousemove", onMouseMove);
+          document.removeEventListener("mouseup", onMouseUp);
+          // Restore default cursor if it was changed during drag (optional)
+          document.body.style.cursor = "";
+        };
+
+        document.addEventListener("mousemove", onMouseMove);
+        document.addEventListener("mouseup", onMouseUp);
+        // Change cursor to indicate dragging
+        document.body.style.cursor =
+          "url('/images/cursors/grabbing.cur'), grabbing";
+      }
+    });
+  }
+
+  function updateScrollbar() {
+    const scrollTop = window.scrollY;
+    const scrollHeight = document.body.scrollHeight - window.innerHeight;
+    const scrollPercentage = scrollTop / scrollHeight;
+    const activeIndex = Math.floor(scrollPercentage * (numLines - 1) + 0.5);
+
+    lines.forEach((line, index) => {
+      line.classList.remove("active", "near-1", "near-2", "near-3");
+
+      if (index === activeIndex) {
+        line.classList.add("active");
+      } else {
+        const distance = Math.abs(index - activeIndex);
+        if (distance <= peakSize) {
+          line.classList.add(`near-${distance}`);
+        }
+      }
+    });
+  }
+
+  window.addEventListener("scroll", updateScrollbar);
+  updateScrollbar();
 }
+
 // --- Fortune Logic ---
 function getFortune() {
   if (typeof Module === "undefined" || !Module._minifortune) {

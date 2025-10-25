@@ -1128,7 +1128,7 @@ nav ul li.active,
     background-color: var(--bg-color);
     border: 1px solid var(--border-color);
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
+    z-index: 3003;
     min-width: 180px;
     padding: 5px 0;
 }
