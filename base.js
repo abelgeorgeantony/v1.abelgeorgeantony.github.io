@@ -25,16 +25,8 @@ document.addEventListener("DOMContentLoaded", async function () {
   // Check for saved theme preference in cookie
   const savedTheme = getCookie("theme");
   setTheme(savedTheme);
-  document.getElementById("theme-toggle").addEventListener("click", () => {
-    const currentTheme = document.documentElement.getAttribute("data-theme");
-    if (currentTheme === "dark") {
-      setTheme("light");
-    } else {
-      setTheme("dark");
-    }
-  });
   document
-    .getElementById("theme-toggle-mobile")
+    .getElementById("context-theme-toggle")
     .addEventListener("click", () => {
       const currentTheme = document.documentElement.getAttribute("data-theme");
       if (currentTheme === "dark") {
@@ -124,8 +116,8 @@ function initCustomContextMenu() {
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
 
-    if (left + menuWidth > viewportWidth - scrollbarWidth) {
-      left = viewportWidth - scrollbarWidth - menuWidth;
+    if (left + menuWidth > viewportWidth) {
+      left = viewportWidth - menuWidth;
     }
     if (top + menuHeight > viewportHeight) {
       top = viewportHeight - menuHeight;
@@ -194,19 +186,21 @@ function getCookie(name) {
 function setTheme(theme) {
   if (theme === "dark") {
     document.documentElement.setAttribute("data-theme", "dark");
-    document.getElementById("theme-toggle").querySelector("span").textContent =
-      "bedtime";
     document
-      .getElementById("theme-toggle-mobile")
-      .querySelector("span").textContent = "bedtime";
+      .getElementById("context-theme-toggle")
+      .querySelector("span").textContent = "light_mode";
+    document
+      .getElementById("context-theme-toggle")
+      .querySelector("p").textContent = "Light Mode";
     document.cookie = "theme=dark; path=/; max-age=31536000";
   } else {
     document.documentElement.removeAttribute("data-theme");
-    document.getElementById("theme-toggle").querySelector("span").textContent =
-      "light_mode";
     document
-      .getElementById("theme-toggle-mobile")
-      .querySelector("span").textContent = "light_mode";
+      .getElementById("context-theme-toggle")
+      .querySelector("span").textContent = "bedtime";
+    document
+      .getElementById("context-theme-toggle")
+      .querySelector("p").textContent = "Dark Mode";
     document.cookie = "theme=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
   }
 }
@@ -504,6 +498,16 @@ function initLineScrollbar() {
 
   window.addEventListener("scroll", updateScrollbar);
   updateScrollbar();
+}
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+function scrollToBottom() {
+  window.scrollTo({
+    top: document.body.scrollHeight,
+    behavior: "smooth",
+  });
 }
 
 // --- Fortune Logic ---

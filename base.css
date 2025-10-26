@@ -35,6 +35,9 @@ html {
 .material-icons {
     line-height: unset !important;
 }
+.material-icons.md-17 {
+    font-size: 17px;
+}
 
 hidden {
     display: none;
@@ -241,7 +244,7 @@ html {
 #custom-scrollbar-container {
     position: fixed;
     top: 0;
-    right: 0;
+    left: 0;
     width: 18px;
     display: flex;
     flex-direction: column;
@@ -290,7 +293,7 @@ body.menu-open #custom-scrollbar-container {
 
 /* --- Main Content --- */
 main {
-    padding: 75px 20px;
+    padding: 75px 10px 75px 30px;
     max-width: 900px;
     margin: 1px auto 0px; /* Increased top margin for fixed header */
 }
@@ -603,7 +606,7 @@ strong[data-tooltip] {
     }
 
     #custom-scrollbar-container {
-        width: 9px;
+        width: 16px;
     }
 
     /* Hide the desktop navigation on mobile */
@@ -1126,7 +1129,8 @@ nav ul li.active,
     display: none;
     position: fixed;
     background-color: var(--bg-color);
-    border: 1px solid var(--border-color);
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
     z-index: 3003;
     min-width: 180px;
@@ -1144,8 +1148,18 @@ nav ul li.active,
     cursor: url("/images/cursors/pointer.cur"), pointer;
     color: var(--text-color);
 }
-
 .custom-context-menu li:hover {
     background-color: var(--primary-color);
     color: var(--bg-color);
+}
+
+.custom-context-menu p {
+    all: revert;
+    margin: 0;
+    padding-left: 7px;
+}
+
+.custom-context-menu button {
+    all: revert;
+    margin-left: 7px;
 }
