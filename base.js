@@ -471,7 +471,7 @@ function initLineScrollbar() {
         document.addEventListener("mouseup", onMouseUp);
         // Change cursor to indicate dragging
         document.body.style.cursor =
-          "url('/images/cursors/grabbing.cur'), grabbing";
+          "url(/images/cursors/grabbing.cur), grabbing";
       }
     });
   }

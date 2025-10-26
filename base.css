@@ -273,6 +273,7 @@ body.menu-open #custom-scrollbar-container {
 .scrollbar-line.active {
     width: 150%;
     background-color: var(--primary-color);
+    cursor: url(images/cursors/grab.cur), grab;
 }
 
 .scrollbar-line.near-1 {
@@ -391,6 +392,7 @@ section {
 
 .hashtag:hover .close-icon {
     opacity: 1;
+    cursor: url(/images/cursors/pointer.cur), pointer;
 }
 
 h1,
