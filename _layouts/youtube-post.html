@@ -1,0 +1,13 @@
+---
+layout: default
+---
+
+<div class="youtube-post">
+  <h2>{{ page.title }}</h2>
+  <p class="post-meta">{{ page.date | date_to_string }}</p>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ page.youtube_id }}" frameborder="0" allowfullscreen></iframe>
+  <p>{{ page.description }}</p>
+  <div class="post-content">
+    {{ content }}
+  </div>
+</div>

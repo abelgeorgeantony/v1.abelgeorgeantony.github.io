@@ -1,0 +1,23 @@
+---
+layout: default
+title: Blog Posts
+permalink: /blog_posts.html
+---
+
+<section id="file-manager">
+    <div class="page-header">
+        <h1>Blog Posts</h1>
+    </div>
+    <div id="directory-listing">
+        <ul class="file-list">
+            {% for post in site.posts %}
+            <li class="file">
+                <a href="{{ post.url }}">
+                    <img src="/images/icons/folders_files/text.svg" alt="Text Document Icon">
+                    {{ post.title }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>

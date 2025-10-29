@@ -5,3 +5,9 @@ collections:
   posts:
     output: true
     permalink: /blog/:title/
+  youtubes:
+    output: true
+    permalink: /youtube/:title/
+  instagrams:
+    output: true
+    permalink: /instagram/:title/
