@@ -48,9 +48,6 @@
                         <li {% if page.url == "/gallery.html" %}class="active"{% endif %}>
                             <a href="/gallery.html">Gallery</a>
                         </li>
-                        <li {% if page.url == "/contact.html" %}class="active"{% endif %}>
-                            <a href="/contact.html">Contact</a>
-                        </li>
                     </ul>
                     <button id="hamburger-btn" aria-label="Open Menu">
                         <span class="material-icons">menu</span>
@@ -85,11 +82,6 @@
                             >|Gallery</a
                         >
                     </li>
-                    <li {% if page.url == "/contact.html" %}class="active"{% endif %}>
-                        <a href="/contact.html"
-                            ><span class="material-icons">mail</span>|Contact</a
-                        >
-                    </li>
                 </ul>
             </div>
         </header>
@@ -97,10 +89,229 @@
         <main>{{ content }}</main>
 
         <footer>
-            <pre
-                id="fortune-text"
-                data-tooltip="This is the minifortune program compiled to WebAssembly and the fortunes is from the debian fortunes source."
-            ></pre>
+            <div class="social-links">
+            <a
+                href="mailto:social.abelgeorgeantony@gmail.com"
+                target="_blank"
+                class="social-link"
+            >
+                <svg
+                    class="social-svg social-svg-stroked"
+                    role="img"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <title>Email</title>
+                    <path
+                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                </svg>
+                <span class="social-text">social.abelgeorgeantony@gmail.com</span>
+            </a>
+            <a
+                href="https://t.me/abelgeorgeantony"
+                target="_blank"
+                class="social-link"
+            >
+                <svg
+                    class="social-svg social-svg-stroked"
+                    role="img"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <title>Telegram</title>
+                    <path
+                        d="M22 2 11 13"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                    <path
+                        d="M22 2 15 22 11 13 2 9 22 2z"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                </svg>
+                <span class="social-text">@abelgeorgeantony</span>
+            </a>
+            <a
+                href="https://github.com/abelgeorgeantony"
+                target="_blank"
+                class="social-link"
+            >
+                <svg
+                    class="social-svg social-svg-stroked"
+                    role="img"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <title>GitHub</title>
+                    <path
+                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                </svg>
+                <span class="social-text">abelgeorgeantony</span>
+            </a>
+            <a
+                href="https://www.instagram.com/abelgeorgeantony"
+                target="_blank"
+                class="social-link"
+            >
+                <svg
+                    class="social-svg social-svg-stroked"
+                    role="img"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <title>Instagram</title>
+                    <rect
+                        width="20"
+                        height="20"
+                        x="2"
+                        y="2"
+                        rx="5"
+                        ry="5"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                    <path
+                        d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    />
+                    <line
+                        x1="17.5"
+                        y1="6.5"
+                        x2="17.51"
+                        y2="6.5"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                    />
+                </svg>
+                <span class="social-text">@abelgeorgeantony</span>
+            </a>
+            <a
+                href="https://www.facebook.com/abelgeorgeantony.fb"
+                target="_blank"
+                class="social-link"
+            >
+                <svg
+                    class="social-svg social-svg-stroked"
+                    role="img"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <title>Facebook</title>
+                    <path
+                        d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                </svg>
+                <span class="social-text">@abelgeorgeantony.fb</span>
+            </a>
+            <a
+                href="https://www.linkedin.com/in/abelgeorgeantony"
+                target="_blank"
+                class="social-link"
+            >
+                <svg
+                    class="social-svg social-svg-stroked"
+                    role="img"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <title>LinkedIn</title>
+                    <path
+                        d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                    <rect
+                        x="2"
+                        y="9"
+                        width="4"
+                        height="12"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                    <circle
+                        cx="4"
+                        cy="4"
+                        r="2"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                </svg>
+                <span class="social-text">abelgeorgeantony</span>
+            </a>
+            <a
+                href="https://www.reddit.com/user/abelgeorgeantony"
+                target="_blank"
+                class="social-link"
+            >
+                <svg
+                    class="social-svg"
+                    role="img"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <title>Reddit</title>
+                    <ellipse cx="12" cy="15.5" rx="10.5" ry="7.5" />
+                    <circle cx="8.5" cy="13" r="1.8" />
+                    <circle cx="15.5" cy="13" r="1.8" />
+                    <path d="M7 16.5 c 1.5 2, 4 3, 5 3 s 3.5 -1, 5 -3" />
+                    <path
+                        d="M4.5 10.5 C 3.5 9.5, 4 7.5, 5.5 6.5 S 8 7.5, 8.5 8.5"
+                    />
+                    <path
+                        d="M19.5 10.5 C 20.5 9.5, 20 7.5, 18.5 6.5 S 16 7.5, 15.5 8.5"
+                    />
+                    <path d="M12.5 7 C 12.5 7, 12 2, 16.5 2" />
+                    <circle cx="17.5" cy="2.5" r="1.5" />
+                </svg>
+                <span class="social-text">u/abelgeorgeantony</span>
+            </a>
+            </div>
+
 
             <div class="footer-bottom">
                 <p>
@@ -139,6 +350,12 @@
                     </div>
                 </div>
             </div>
+
+
+            <pre
+                id="fortune-text"
+                data-tooltip="This is the minifortune program compiled to WebAssembly and the fortunes is from the debian fortunes source."
+            ></pre>
         </footer>
         <div id="custom-scrollbar-container"></div>
 
