@@ -57,7 +57,6 @@ function initCustomContextMenu() {
     nativeContextMenuRequested = true; // Set flag to allow native menu for the *next* contextmenu event
 
     // Dispatch mousedown event
-    // Dispatch mousedown event
     targetElement.dispatchEvent(
       new MouseEvent("mousedown", {
         bubbles: true,
@@ -94,6 +93,11 @@ function initCustomContextMenu() {
   const handleDocumentContextMenu = function (e) {
     // console.log("handleDocumentContextMenu fired. nativeContextMenuRequested:", nativeContextMenuRequested); // Debugging
     if (nativeContextMenuRequested) {
+      nativeContextMenuRequested = false; // Reset the flag after allowing native menu to show
+      return; // Allow native context menu to show
+    }
+    console.log(window.getSelection());
+    if (window.getSelection().type === "Range") {
       nativeContextMenuRequested = false; // Reset the flag after allowing native menu to show
       return; // Allow native context menu to show
     }

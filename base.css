@@ -1142,6 +1142,7 @@ nav ul li.active,
     z-index: 3003;
     min-width: 180px;
     padding: 5px 0;
+    user-select: none;
 }
 
 .custom-context-menu ul {
