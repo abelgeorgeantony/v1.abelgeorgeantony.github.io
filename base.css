@@ -55,12 +55,31 @@ body {
     cursor: url("/images/icons/cursors/default.cur"), default;
 }
 
-p {
-    cursor: url("/images/icons/cursors/text.cur"), text;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+#caption {
+    cursor:
+        url("/images/icons/cursors/text.cur") 15 15,
+        text;
 }
 
 a {
     cursor: url("/images/icons/cursors/pointer.cur"), pointer;
+}
+
+img,
+.material-icons {
+    user-select: none;
+}
+
+::selection {
+    background-color: orangered;
+    text-shadow: none;
 }
 
 /* --- Header & Navigation --- */
@@ -272,7 +291,7 @@ body.menu-open #custom-scrollbar-container {
 
 .scrollbar-line.active {
     width: 150%;
-    background-color: var(--primary-color);
+    background-color: orangered;
     cursor: url(images/icons/cursors/grab.cur), grab;
 }
 
