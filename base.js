@@ -458,6 +458,11 @@ function initLineScrollbar() {
             Math.min(scrollHeight, newScrollTop),
           );
 
+          document.querySelectorAll(".scrollbar-line").forEach((line) => {
+            line.style.cursor =
+              "url(/images/icons/cursors/grabbing.cur), grabbing";
+          });
+
           window.scrollTo({
             top: clampedScrollTop,
           });
@@ -467,7 +472,15 @@ function initLineScrollbar() {
           isDraggingScrollbar = false;
           document.removeEventListener("mousemove", onMouseMove);
           document.removeEventListener("mouseup", onMouseUp);
-          // Restore default cursor if it was changed during drag (optional)
+          // Restoring cursors
+          document.querySelectorAll(".scrollbar-line").forEach((line) => {
+            if (line.classList.contains("active")) {
+              line.style.cursor = "url(images/icons/cursors/grab.cur), grab";
+            } else {
+              line.style.cursor =
+                "url(images/icons/cursors/pointer.cur), pointer";
+            }
+          });
           document.body.style.cursor = "";
         };
 
