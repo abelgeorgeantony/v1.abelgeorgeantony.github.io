@@ -61,8 +61,9 @@ h3,
 h4,
 h5,
 h6,
-p,
+.text-only,
 #caption {
+    width: fit-content;
     cursor:
         url("/images/icons/cursors/text.cur") 15 15,
         text;
@@ -80,6 +81,10 @@ img,
 ::selection {
     background-color: orangered;
     text-shadow: none;
+}
+
+.hidden {
+    display: none !important;
 }
 
 /* --- Header & Navigation --- */
@@ -291,7 +296,7 @@ body.menu-open #custom-scrollbar-container {
 
 .scrollbar-line.active {
     width: 150%;
-    background-color: orangered;
+    background-color: var(--primary-color);
     cursor: url(images/icons/cursors/grab.cur), grab;
 }
 
