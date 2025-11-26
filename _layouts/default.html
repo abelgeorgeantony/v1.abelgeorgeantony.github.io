@@ -27,6 +27,7 @@
         {% endif %}
     </head>
     <body>
+        <div id="loader"></div>
         <header>
             <nav>
                 <div class="nav-left-container">
@@ -41,9 +42,6 @@
                         </li>
                         <li {% if page.url == "/posts.html" %}class="active"{% endif %}>
                             <a href="/posts.html">Posts</a>
-                        </li>
-                        <li {% if page.url == "/quotes.html" %}class="active"{% endif %}>
-                            <a href="/quotes.html">Quotes</a>
                         </li>
                         <li {% if page.url == "/gallery.html" %}class="active"{% endif %}>
                             <a href="/gallery.html">Gallery</a>
@@ -68,12 +66,6 @@
                         <a href="/posts.html"
                             ><span class="material-icons">auto_stories</span
                             >|Posts</a
-                        >
-                    </li>
-                    <li {% if page.url == "/quotes.html" %}class="active"{% endif %}>
-                        <a href="/quotes.html"
-                            ><span class="material-icons">format_quote</span
-                            >|Quotes</a
                         >
                     </li>
                     <li {% if page.url == "/gallery.html" %}class="active"{% endif %}>
@@ -372,6 +364,9 @@
                 data-tooltip="This is the minifortune program compiled to WebAssembly and the fortunes is from the debian fortunes source."
             ></pre>
         </footer>
+        <div id="toast-notification" class="hidden"></div>
+
+
         <div id="custom-scrollbar-container"></div>
 
         <div id="image-viewer" class="image-viewer-hidden">
@@ -389,8 +384,8 @@
             <ul>
                 <li class="custom-context-menu-item" id="context-show-browser-menu">Enable Browser Menu</li>
                 <li class="custom-context-menu-item" id="context-theme-toggle" style="display: flex; flex-direction: row;"><span class="material-icons md-17">bedtime</span><p>Dark Theme</p></li>
-                <li class="custom-context-menu-item" id="context-page-scroll" style="display: flex; flex-direction: row;"><p>Scroll</p><button onclick="scrollToTop()"><span class="material-icons md-17">arrow_upward</span></button><button onclick="scrollToBottom()"><span class="material-icons md-17">arrow_downward</span></button></li>
-                <li class="custom-context-menu-item">Option 3</li>
+                <li class="custom-context-menu-item" id="context-page-scroll-up" style="display: flex; flex-direction: row;" onclick="scrollToTop()"><span class="material-icons md-17">arrow_upward</span><p>Scroll</p></li>
+                <li class="custom-context-menu-item" id="context-page-scroll-down" style="display: flex; flex-direction: row;" onclick="scrollToBottom()"><span class="material-icons md-17">arrow_downward</span><p>Scroll</p></li>
                 <li class="custom-context-menu-item">Option 4</li>
                 <li class="custom-context-menu-item">Option 5</li>
             </ul>

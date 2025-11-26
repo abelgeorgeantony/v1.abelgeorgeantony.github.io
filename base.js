@@ -1,4 +1,9 @@
+async function loaderScrStart() {}
+function loaderScrStop() {
+  document.getElementById("loader").classList.add("hidden");
+}
 document.addEventListener("DOMContentLoaded", async function () {
+  loaderScrStart();
   console.log("DOMContentLoaded event fired");
 
   document.getElementById("hamburger-btn").addEventListener("click", () => {
@@ -43,6 +48,11 @@ document.addEventListener("DOMContentLoaded", async function () {
   initCustomContextMenu(); // Initialize the custom context menu
 });
 
+window.addEventListener("load", () => {
+  console.log("load event fired");
+  loaderScrStop();
+});
+
 // --- Custom Context Menu Logic ---
 function initCustomContextMenu() {
   const customContextMenu = document.getElementById("custom-context-menu");
@@ -79,14 +89,6 @@ function initCustomContextMenu() {
         buttons: 2,
       }),
     );
-
-    // Ensure the flag is reset after a short delay, even if the native menu doesn't show immediately.
-    //setTimeout(() => {
-    //nativeContextMenuRequested = false;
-    //}, 100); // 100ms should be enough for the browser to process the mouse events.
-
-    // The `contextmenu` event should now naturally follow these mouse events,
-    // and `handleDocumentContextMenu` will allow it to proceed.
   };
 
   // Define the main contextmenu handler directly
@@ -96,12 +98,25 @@ function initCustomContextMenu() {
       nativeContextMenuRequested = false; // Reset the flag after allowing native menu to show
       return; // Allow native context menu to show
     }
-    console.log(window.getSelection());
     if (window.getSelection().type === "Range") {
       nativeContextMenuRequested = false; // Reset the flag after allowing native menu to show
       return; // Allow native context menu to show
     }
+    if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") {
+      nativeContextMenuRequested = false; // Reset the flag after allowing native menu to show
+      return; // Allow native context menu to show
+    }
+    if (e.target.tagName === "A" || e.target.parentElement.tagName === "A") {
+      nativeContextMenuRequested = false; // Reset the flag after allowing native menu to show
+      return; // Allow native context menu to show
+    }
+    if (e.target.tagName === "IMG") {
+      nativeContextMenuRequested = false; // Reset the flag after allowing native menu to show
+      return; // Allow native context menu to show
+    }
+    console.log(e);
     e.preventDefault(); // Prevent default browser context menu
+
     lastContextMenuEvent = e; // Store the event
 
     customContextMenu.style.display = "block";
@@ -113,6 +128,7 @@ function initCustomContextMenu() {
     // Ensure menu stays within viewport
     const menuWidth = customContextMenu.offsetWidth;
     const menuHeight = customContextMenu.offsetHeight;
+    console.log("Width: " + menuWidth + ", Height: " + menuHeight);
     const customScrollbar = document.getElementById(
       "custom-scrollbar-container",
     );
@@ -131,8 +147,46 @@ function initCustomContextMenu() {
     customContextMenu.style.top = `${top}px`;
   };
 
+  const handleScrollBtnsVisibility = function () {
+    const scrollY = Number(window.scrollY);
+    const documentHeight =
+      Number(document.documentElement.scrollHeight) -
+      Number(window.innerHeight);
+    if (scrollY === 0) {
+      document.getElementById("context-page-scroll-up").classList.add("hidden");
+      document
+        .getElementById("context-page-scroll-down")
+        .classList.remove("hidden");
+    } else if (scrollY >= documentHeight) {
+      document
+        .getElementById("context-page-scroll-down")
+        .classList.add("hidden");
+      document
+        .getElementById("context-page-scroll-up")
+        .classList.remove("hidden");
+    } else {
+      document
+        .getElementById("context-page-scroll-up")
+        .classList.remove("hidden");
+      document
+        .getElementById("context-page-scroll-down")
+        .classList.remove("hidden");
+    }
+    const menuHeight = customContextMenu.offsetHeight;
+    const viewportHeight = window.innerHeight;
+    const oldTop = parseFloat(customContextMenu.style.top.replace("px", ""));
+    if (oldTop + menuHeight > viewportHeight) {
+      const newTop = viewportHeight - menuHeight;
+      customContextMenu.style.top = `${newTop}px`;
+    }
+  };
+
   // Add the main contextmenu handler
   document.addEventListener("contextmenu", handleDocumentContextMenu);
+
+  window.onscroll = () => {
+    handleScrollBtnsVisibility();
+  };
 
   document.addEventListener("click", function (e) {
     // Hide the custom context menu if clicking outside of it
@@ -172,6 +226,8 @@ function initCustomContextMenu() {
       // Add specific functionality for each option later
     });
   });
+
+  handleScrollBtnsVisibility();
 }
 
 function isSmallScreen() {
@@ -195,7 +251,7 @@ function setTheme(theme) {
       .querySelector("span").textContent = "light_mode";
     document
       .getElementById("context-theme-toggle")
-      .querySelector("p").textContent = "Light Mode";
+      .querySelector("p").textContent = "Light theme";
     document.cookie = "theme=dark; path=/; max-age=31536000";
   } else {
     document.documentElement.removeAttribute("data-theme");
@@ -204,7 +260,7 @@ function setTheme(theme) {
       .querySelector("span").textContent = "bedtime";
     document
       .getElementById("context-theme-toggle")
-      .querySelector("p").textContent = "Dark Mode";
+      .querySelector("p").textContent = "Dark theme";
     document.cookie = "theme=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
   }
 }
@@ -218,20 +274,21 @@ function initHashtagDragAndDrop() {
 
     draggables.forEach((draggable) => {
       draggable.addEventListener("dragstart", (e) => {
+        console.log(e.dataTransfer);
+        document.body.style.cursor =
+          "url('/images/icons/cursors/grabbing.cur'), grabbing !important";
+        console.log(document.body.style.cursor);
         draggable.classList.add("dragging");
         e.dataTransfer.effectAllowed = "move"; // Indicate a move operation
-        // document.body.style.cursor manipulations removed as they are ineffective for the drag image itself
       });
 
       draggable.addEventListener("dragend", () => {
         draggable.classList.remove("dragging");
-        // document.body.style.cursor manipulations removed as they are ineffective for the drag image itself
       });
     });
 
     container.addEventListener("dragover", (e) => {
       e.preventDefault();
-      // document.body.style.cursor manipulations removed as they are ineffective for the drag image itself
       const afterElement = getDragAfterElement(container, e.clientX);
       const draggable = document.querySelector(".dragging");
       if (afterElement == null) {
@@ -481,7 +538,7 @@ function initLineScrollbar() {
                 "url(images/icons/cursors/pointer.cur), pointer";
             }
           });
-          document.body.style.cursor = "";
+          document.body.removeAttribute("style");
         };
 
         document.addEventListener("mousemove", onMouseMove);
@@ -560,4 +617,39 @@ function onFortuneModuleReady() {
       return;
     }
   }
+}
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+const colors = [
+  "yellow",
+  "red",
+  "green",
+  "blue",
+  "purple",
+  "orange",
+  "pink",
+  "brown",
+];
+
+document.addEventListener("selectionchange", () => {
+  const selection = window.getSelection();
+  console.log(selection.toString());
+});
+
+document.addEventListener("copy", () => {
+  showToast("Copied!");
+});
+
+async function showToast(message) {
+  const notifier = document.getElementById("toast-notification");
+  notifier.innerText = message;
+  notifier.classList.remove("hidden");
+
+  setTimeout(() => {
+    notifier.innerText = "";
+    notifier.classList.add("hidden");
+  }, 2000);
 }
