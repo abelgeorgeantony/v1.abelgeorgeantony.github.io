@@ -66,12 +66,10 @@ body {
     background: var(--alt-bg-color);
     z-index: 3002;
     top: 90%;
-    left: 45%;
+    left: 50%;
+    transform: translateX(-50%);
     border-radius: 10px;
-    border: 2px solid;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border: 1px solid;
 }
 
 h1,
@@ -93,7 +91,8 @@ a {
 }
 
 img,
-.material-icons {
+.material-icons,
+.scrollbar-line {
     user-select: none;
 }
 

@@ -93,7 +93,6 @@ function initCustomContextMenu() {
 
   // Define the main contextmenu handler directly
   const handleDocumentContextMenu = function (e) {
-    // console.log("handleDocumentContextMenu fired. nativeContextMenuRequested:", nativeContextMenuRequested); // Debugging
     if (nativeContextMenuRequested) {
       nativeContextMenuRequested = false; // Reset the flag after allowing native menu to show
       return; // Allow native context menu to show
@@ -113,6 +112,13 @@ function initCustomContextMenu() {
     if (e.target.tagName === "IMG") {
       nativeContextMenuRequested = false; // Reset the flag after allowing native menu to show
       return; // Allow native context menu to show
+    }
+    if (
+      e.target === document.getElementById("custom-scrollbar-container") ||
+      e.target.classList.contains("scrollbar-line")
+    ) {
+      e.preventDefault();
+      return;
     }
     console.log(e);
     e.preventDefault(); // Prevent default browser context menu
@@ -459,7 +465,7 @@ function initLineScrollbar() {
     container.style.height = `calc(100% - ${headerHeight}px)`;
   }, 100);
 
-  const numLines = 50;
+  const numLines = 70; // Earlier satisfied value = 50
   const peakSize = 3; // Number of lines to include in the peak on each side
   let lines = [];
   let isDraggingScrollbar = false;
@@ -485,10 +491,12 @@ function initLineScrollbar() {
         top: scrollTop,
         behavior: "smooth",
       });
+      line.style.cursor = "url(/images/icons/cursors/grab.cur), grab";
     });
 
     line.addEventListener("mousedown", (e) => {
       // Only initiate drag if the active line is clicked
+      //START: do {
       if (line.classList.contains("active")) {
         isDraggingScrollbar = true;
         startY = e.clientY;
@@ -546,7 +554,15 @@ function initLineScrollbar() {
         // Change cursor to indicate dragging
         document.body.style.cursor =
           "url(/images/icons/cursors/grabbing.cur), grabbing";
+        //break START;
+      } else {
+        line.click();
+        console.log(line);
+        //continue START;
+        //line.dispatchEvent(new Event("mousedown"));
       }
+      //break START;
+      //} while (true);
     });
   }
 
@@ -643,7 +659,7 @@ document.addEventListener("copy", () => {
   showToast("Copied!");
 });
 
-async function showToast(message) {
+async function showToast(message, timeout = 2000) {
   const notifier = document.getElementById("toast-notification");
   notifier.innerText = message;
   notifier.classList.remove("hidden");
@@ -651,5 +667,5 @@ async function showToast(message) {
   setTimeout(() => {
     notifier.innerText = "";
     notifier.classList.add("hidden");
-  }, 2000);
+  }, timeout);
 }

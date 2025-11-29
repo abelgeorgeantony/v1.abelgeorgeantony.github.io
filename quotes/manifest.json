@@ -1,9 +1,0 @@
----
----
-{% assign quote_files = "" | split: "" %}
-{% for file in site.static_files %}
-  {% if file.path contains '/quotes/' and file.extname == '.json' and file.name != 'manifest.json' %}
-    {% assign quote_files = quote_files | push: file.name %}
-  {% endif %}
-{% endfor %}
-{{ quote_files | jsonify }}
