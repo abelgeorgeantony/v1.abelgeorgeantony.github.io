@@ -45,6 +45,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   initHashtagToggle();
   initTooltips();
   initLineScrollbar();
+  initAsideContent();
   initCustomContextMenu(); // Initialize the custom context menu
 });
 
@@ -357,6 +358,12 @@ function initTooltips() {
       const tooltipText = element.getAttribute("data-tooltip");
       tooltip.textContent = tooltipText;
       tooltip.style.display = "block";
+      element.dispatchEvent(
+        new MouseEvent("mousemove", {
+          clientX: e.clientX,
+          clientY: e.clientY,
+        }),
+      );
     });
 
     element.addEventListener("mouseleave", () => {
@@ -400,60 +407,6 @@ function initTooltips() {
   });
 }
 
-/*function initLineScrollbar() {
-  const container = document.getElementById("custom-scrollbar-container");
-  const header = document.querySelector("header");
-
-  // Ensure the header is loaded before getting its height
-  setTimeout(() => {
-    const headerHeight = header.offsetHeight;
-    container.style.top = `${headerHeight}px`;
-    container.style.height = `calc(100% - ${headerHeight}px)`;
-  }, 100);
-
-  const numLines = 50;
-  const peakSize = 3; // Number of lines to include in the peak on each side
-  let lines = [];
-
-  for (let i = 0; i < numLines; i++) {
-    const line = document.createElement("div");
-    line.className = "scrollbar-line";
-    container.appendChild(line);
-    lines.push(line);
-
-    line.addEventListener("click", () => {
-      const scrollPercentage = i / (numLines - 1);
-      const scrollHeight = document.body.scrollHeight - window.innerHeight;
-      const scrollTop = scrollPercentage * scrollHeight;
-      window.scrollTo({
-        top: scrollTop,
-      });
-    });
-  }
-
-  function updateScrollbar() {
-    const scrollTop = window.scrollY;
-    const scrollHeight = document.body.scrollHeight - window.innerHeight;
-    const scrollPercentage = scrollTop / scrollHeight;
-    const activeIndex = Math.floor(scrollPercentage * (numLines - 1) + 0.5);
-
-    lines.forEach((line, index) => {
-      line.classList.remove("active", "near-1", "near-2", "near-3");
-
-      if (index === activeIndex) {
-        line.classList.add("active");
-      } else {
-        const distance = Math.abs(index - activeIndex);
-        if (distance <= peakSize) {
-          line.classList.add(`near-${distance}`);
-        }
-      }
-    });
-  }
-
-  window.addEventListener("scroll", updateScrollbar);
-  updateScrollbar();
-}*/
 function initLineScrollbar() {
   const container = document.getElementById("custom-scrollbar-container");
   const header = document.querySelector("header");
@@ -570,15 +523,16 @@ function initLineScrollbar() {
     const scrollTop = window.scrollY;
     const scrollHeight = document.body.scrollHeight - window.innerHeight;
     const scrollPercentage = scrollTop / scrollHeight;
-    const activeIndex = Math.floor(scrollPercentage * (numLines - 1) + 0.5);
+    const activateIndex = Math.floor(scrollPercentage * (numLines - 1) + 0.5);
 
     lines.forEach((line, index) => {
+      //console.log(index, activeIndex);
       line.classList.remove("active", "near-1", "near-2", "near-3");
 
-      if (index === activeIndex) {
+      if (index === activateIndex) {
         line.classList.add("active");
       } else {
-        const distance = Math.abs(index - activeIndex);
+        const distance = Math.abs(index - activateIndex);
         if (distance <= peakSize) {
           line.classList.add(`near-${distance}`);
         }
@@ -586,7 +540,9 @@ function initLineScrollbar() {
     });
   }
 
-  window.addEventListener("scroll", updateScrollbar);
+  window.addEventListener("scroll", () => {
+    updateScrollbar();
+  });
   updateScrollbar();
 }
 
@@ -598,6 +554,43 @@ function scrollToBottom() {
     top: document.body.scrollHeight,
     behavior: "smooth",
   });
+}
+
+function initAsideContent() {
+  const aside = document.querySelector("aside");
+  const header = document.querySelector("header");
+
+  // Ensure the header is loaded before getting its height
+  setTimeout(() => {
+    const headerHeight = header.offsetHeight;
+    aside.style.marginTop = `${headerHeight}px`;
+    aside.style.height = `calc(100% - ${headerHeight}px)`;
+  }, 100);
+
+  let positionIsUnset = false;
+  function updateAsidePosition() {
+    const marginTop = header.offsetHeight + window.scrollY;
+    if (isFooterInViewport()) {
+      if (!positionIsUnset) {
+        aside.style.marginTop = `${marginTop}px`;
+        aside.style.position = "unset";
+        positionIsUnset = true;
+      }
+    } else {
+      aside.removeAttribute("style");
+      positionIsUnset = false;
+    }
+  }
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (!isSmallScreen()) {
+        updateAsidePosition();
+      }
+    },
+    { passive: true },
+  );
+  updateAsidePosition();
 }
 
 // --- Fortune Logic ---
@@ -634,6 +627,14 @@ function onFortuneModuleReady() {
     }
   }
 }
+
+function isFooterInViewport() {
+  var rect = document.querySelector("footer").getBoundingClientRect();
+  return (
+    rect.top <= (window.innerHeight || document.documentElement.clientHeight)
+  );
+}
+
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);

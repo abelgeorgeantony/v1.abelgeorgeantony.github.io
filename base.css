@@ -278,7 +278,6 @@ html[data-theme="dark"] .theme-toggle-button .material-icons {
 html {
     scrollbar-width: none;
 }
-
 ::-webkit-scrollbar {
     display: none;
 }
@@ -335,12 +334,26 @@ body.menu-open #custom-scrollbar-container {
 }
 
 /* --- Main Content --- */
-main {
-    padding: 75px 10px 75px 30px;
-    max-width: 900px;
-    margin: 1px auto 0px; /* Increased top margin for fixed header */
+.main-content {
+    display: flex;
+    flex-direction: row;
 }
-
+main {
+    padding: 75px 25px 75px 30px;
+    width: 70%;
+    margin: 1px 0px 0px; /* Increased top margin for fixed header */
+}
+aside {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    margin-top: 63px;
+    position: fixed;
+    left: 74%;
+    width: 26%;
+}
 .main-image {
     width: 100%;
     height: 200px;
@@ -609,7 +622,7 @@ footer {
 .cursor-tooltip {
     display: none;
     position: fixed;
-    z-index: 2000;
+    z-index: 4000;
     background-color: var(--alt-bg-color);
     color: var(--text-color);
     border: 1px solid var(--border-color);
@@ -644,6 +657,19 @@ strong[data-tooltip] {
 }
 
 @media (max-width: 768px) {
+    .main-content {
+        flex-direction: column;
+    }
+    main {
+        width: 94%;
+        padding-bottom: 0 !important;
+    }
+    aside {
+        width: auto;
+        position: unset !important;
+        margin-top: 0 !important;
+    }
+
     .image-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -697,6 +723,9 @@ strong[data-tooltip] {
         padding-left: 0 !important;
     }
 
+    .social-link {
+        margin-top: 2rem;
+    }
     .social-link span {
         display: none;
     }
@@ -708,7 +737,7 @@ strong[data-tooltip] {
     flex-direction: row;
     flex-wrap: wrap;
     gap: 0.9rem;
-    margin-top: 2rem;
+    margin-top: 10px;
     margin-bottom: 0.9rem;
 }
 
@@ -738,6 +767,7 @@ strong[data-tooltip] {
 .social-text {
     font-weight: 500;
     font-size: 1rem;
+    display: none;
 }
 
 /* --- 404 Page --- */
